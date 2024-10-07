@@ -1,4 +1,4 @@
-#include "say_hello.h"
+#include "../include/teste/say_hello.h"
 #include <stdio.h>
 
 int main() {
