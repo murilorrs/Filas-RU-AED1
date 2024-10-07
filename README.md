@@ -1,6 +1,6 @@
 # Projeto Filas-RU-AED1
 
-Este projeto é uma implementação de um sistema de filas para o Restaurante Universitário (RU) utilizando conceitos de Algoritmos e Estruturas de Dados 1.
+Este projeto é uma implementação de um sistema de filas do Restaurante Universitário utilizando conceitos de Algoritmos e Estruturas de Dados 1.
 
 ## Estrutura de Pastas
 
