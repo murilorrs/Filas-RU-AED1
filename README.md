@@ -21,6 +21,11 @@ Certifique-se de que tenha o mingw32-make instalado no ambiente de trabalho.
 
 O executável e os arquivos objetos (.o) serão gerados na pasta `build/`. 
 
+**Alternativamente** pode se compilar o projeto manualmente com o comando:
+  ```bash
+  g++ src/*.c -o build/restaurante
+  ```
+
 ## Execução
 
 Após a compilação, você pode executar o programa principal com o seguinte comando:
