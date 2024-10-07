@@ -9,6 +9,9 @@ Este projeto é uma implementação de um sistema de filas do Restaurante Univer
 - **build/**: Diretório onde os executáveis serão gerados após a compilação.
 - **Makefile**: Configurações do Makefile para compilar o projeto.
 
+Os arquivos dentro de `include` e `src` devem ser separados em subpastas com a descrição da feature como:
+`src/objetos`
+
 ## Compilação
 
 Certifique-se de que tenha o mingw32-make instalado no ambiente de trabalho.
