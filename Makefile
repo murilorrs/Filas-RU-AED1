@@ -1,29 +1,31 @@
-# Variáveis
-CC = gcc
-CFLAGS = -Iinclude -Wall -g
-SRC = $(wildcard src/*.c)
-OBJ_DIR = build/obj
-OBJ = $(patsubst src/%.c, $(OBJ_DIR)/%.o, $(SRC))
-TARGET = build/restaurante
+# Diretórios
+SRC_DIR = src
+INCLUDE_DIR = include
+BUILD_DIR = build
 
-# Cria o diretório build e build/obj se não existir
-$(shell mkdir -p $(OBJ_DIR))
+# Flags de compilação (encontrando todos os subdiretórios de include)
+CFLAGS = $(addprefix -I,$(shell find $(INCLUDE_DIR) -type d)) -Wall -g
 
-# Regra padrão (default)
-all: $(TARGET)
+# Encontrar todos os arquivos .c
+SRCS = $(shell find $(SRC_DIR) -name "*.c")
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+EXEC = $(BUILD_DIR)/restaurante
 
-# Linka os objetos para criar o executável
-$(TARGET): $(OBJ)
-	$(CC) -o $@ $^
+# Regra padrão
+all: $(EXEC)
 
-# Compila os arquivos .c em .o
-$(OBJ_DIR)/%.o: src/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+# Linkagem final do executável
+$(EXEC): $(OBJS)
+	@mkdir -p $(BUILD_DIR)
+	gcc -o $@ $^
 
-# Limpeza
+# Compilação dos arquivos .c para .o
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	gcc $(CFLAGS) -c $< -o $@
+
+# Limpeza dos arquivos compilados
 clean:
-	rm -f $(OBJ_DIR)/*.o $(TARGET)
+	rm -rf $(BUILD_DIR)
 
-# Executar o programa
-run: all
-	./$(TARGET)
+.PHONY: all clean
