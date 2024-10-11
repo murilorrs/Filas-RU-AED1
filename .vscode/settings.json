@@ -2,6 +2,8 @@
   "files.associations": {
     "*.js": "javascriptreact",
     "*.json": "jsonc",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "usuario.h": "c",
+    "stdlib.h": "c"
   }
 }

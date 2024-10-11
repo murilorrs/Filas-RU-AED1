@@ -26,7 +26,7 @@ O executável e os arquivos objetos (.o) serão gerados na pasta `build/`.
 
 **Alternativamente**, pode se compilar o projeto manualmente com o comando:
   ```bash
-  g++ $(find src -name "*.c") -o build/restaurante
+  g++ -Iinclude $(find src -name "*.c") -o build/restaurante
   ```
 
 ## Execução
