@@ -20,4 +20,4 @@ Usuario *criarUsuario(int id);
 
 void contaTempoFila(Usuario *usuario); // Percorrer a fila e incrementar o tempo de cada usuario a cada vez que a funcao for chamada.
 
-void contaTempoAtendimento(Usuario *usuario); // Percorrer a fila da bancada e incrementar o tempo de cada usuario a cada vez que a funcao for chamada.
+void contaTempoAtendimento(Usuario *usuario);

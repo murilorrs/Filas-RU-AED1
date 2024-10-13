@@ -1,13 +1,20 @@
 #include "../../include/usuario/usuario.h"
 
+void iniciaAleatoriedade() { srand(time(NULL)); }
+
 Usuario *criarUsuario(int id) {
-  srand(time(NULL));
 
   Usuario *usuario = malloc(sizeof(Usuario));
-
   if (usuario == NULL) {
     fprintf(stderr, "Erro ao alocar memória para o usuário.\n");
     exit(1);
+  }
+
+  int chanceDeSerGerado = rand() % 2;
+
+  if (chanceDeSerGerado == 0) {
+    free(usuario);
+    return NULL;
   }
 
   usuario->id = id;
@@ -25,5 +32,15 @@ Usuario *criarUsuario(int id) {
   else
     usuario->eVegetariano = 0;
 
+  usuario->tempoFila = 0;
+
   return usuario;
+}
+
+void contaTempoFila(Usuario *usuario) {
+
+  if (usuario != NULL) {
+    usuario->tempoFila++;
+    printf("Usuario do id %d, tempo na fila: %d\n", usuario->id, usuario->tempoFila);
+  }
 }
