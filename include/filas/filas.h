@@ -15,7 +15,7 @@ typedef struct Fila {
 
 Fila *criarFila(); // Cria uma nova fila
 
-void addFila(Fila *fila, int dado); // Adiciona um dado à fila
+void addFila(Fila *fila, Usuario dado); // Adiciona um dado à fila
 
 Usuario rmFila(Fila *fila); // Remove e retorna o dado do início da fila
 
