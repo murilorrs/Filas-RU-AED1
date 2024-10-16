@@ -39,8 +39,14 @@ Usuario *criarUsuario(int id) {
 
 void contaTempoFila(Usuario *usuario) {
 
-  if (usuario != NULL) {
+  if (usuario != NULL && usuario->status == "fila") {
     usuario->tempoFila++;
-    printf("Usuario do id %d, tempo na fila: %d\n", usuario->id, usuario->tempoFila);
+  }
+}
+
+void contaTempoAtendimento(Usuario *usuario) {
+
+  if (usuario != NULL) {
+    usuario->tempoAtendimento++;
   }
 }
