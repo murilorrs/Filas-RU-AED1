@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 typedef struct {
@@ -14,10 +15,11 @@ typedef struct {
   int tempoFila;
   int tempoAtendimento;
   int servicoFinalizado;
+  char status[20];
 } Usuario;
 
 Usuario *criarUsuario(int id);
 
 void contaTempoFila(Usuario *usuario); // Percorrer a fila e incrementar o tempo de cada usuario a cada vez que a funcao for chamada.
 
-void contaTempoAtendimento(Usuario *usuario);
+void contaTempoAtendimento(Usuario *usuario); // Conta o tempo total de atendimento desde a criação

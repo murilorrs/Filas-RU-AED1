@@ -1,0 +1,1 @@
+Esta pasta não é rastreada pelo git, portanto, os resultados de compilação não estarão visíveis a menos que seja executado localmente na sua maquina segundo os passos do README.md na raiz deste projeto
