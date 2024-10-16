@@ -4,6 +4,8 @@
     "*.json": "jsonc",
     "stdio.h": "c",
     "usuario.h": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "stdbool.h": "c",
+    "filas.h": "c"
   }
 }
