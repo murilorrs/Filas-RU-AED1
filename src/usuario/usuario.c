@@ -39,7 +39,7 @@ Usuario *criarUsuario(int id) {
 
 void contaTempoFila(Usuario *usuario) {
 
-  if (usuario != NULL && usuario->status == "fila") {
+  if (usuario != NULL && strcmp(usuario->status, "fila") == 0) {
     usuario->tempoFila++;
   }
 }
