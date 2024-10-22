@@ -1,12 +1,17 @@
 #include "../../include/servente/servente.h"
 
 
-Servente *criarServente(int id, int ingredienteServido) {
+Servente *criarServente(int id, int ingredienteServido, int qtdeServentes) {
 
   Servente *servente = malloc(sizeof(Servente));
 
   if (servente == NULL) {
     fprintf(stderr, "Erro ao alocar memória para o usuário.\n");
+    exit(1);
+  }
+  
+  if (qtdeServentes >= QTSERMAX) {
+    fprintf(stderr, "Quantidade de serventes passou do limite estabelecido.\n");
     exit(1);
   }
 
@@ -26,7 +31,7 @@ Servente *criarServente(int id, int ingredienteServido) {
   return servente;
 }
 
-bool servirUsuario(Servente *servente,Usuario *user, int FoodrateDoUsuarioProIngrediente){  //ESSA FUNÇÃO VAI CONTER O TIPO VASILHA QUANDO IMPLEMENTAR!!!
+bool servirUsuario(Servente *servente,Usuario *user){  //ESSA FUNÇÃO VAI CONTER O TIPO VASILHA QUANDO IMPLEMENTAR!!!
   if (checaFoodRate(user, servente) < 50){
     servente->usuariosAtendidos++;
     return true;
