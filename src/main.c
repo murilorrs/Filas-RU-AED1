@@ -1,20 +1,29 @@
-#include "../include/usuario/usuario.h"
+#include "../include/filas/filas.h"
+#include "../include/usuarios/usuarios.h"
 #include <stdio.h>
-#define MAX_USERS 100
+
+#define MAX_USERS 10
 
 int main() {
 
-  // printf("Hello, World!\n");
+  iniciaAleatoriedade();
+
+  Fila *fila1 = criarFila();
 
   for (int i = 0; i < MAX_USERS; i++) {
     Usuario *usuario = criarUsuario(i);
-    printf("Usuario %d\n", usuario->id);
+
+    if (usuario != NULL)
+      addFila(fila1, usuario);
+    else
+      free(usuario);
   }
 
-  // contaTempoFila(usuario);
-  // contaTempoFila(usuario);
-  // contaTempoFila(usuario);
-  // contaTempoFila(usuario);
+  exibeFila(fila1);
+
+  rmFila(fila1);
+
+  exibeFila(fila1);
 
   return 0;
 }
