@@ -1,3 +1,6 @@
+#ifndef USUARIOS_H
+#define USUARIOS_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,8 +21,12 @@ typedef struct {
   char status[20];
 } Usuario;
 
+void iniciaAleatoriedade();
+
 Usuario *criarUsuario(int id);
 
 void contaTempoFila(Usuario *usuario); // Percorrer a fila e incrementar o tempo de cada usuario a cada vez que a funcao for chamada.
 
 void contaTempoAtendimento(Usuario *usuario); // Conta o tempo total de atendimento desde a criação
+
+#endif
