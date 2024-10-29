@@ -9,14 +9,16 @@ typedef struct No {
 } No;
 
 typedef struct Fila {
-  No *frente; // Ponteiro para o primeiro elemento da fila
-  No *tras;   // Ponteiro para o último elemento da fila
+  No *frente;
+  No *tras;
 } Fila;
 
-Fila *criarFila(); // Cria uma nova fila
+Fila *criarFila();
 
-void addFila(Fila *fila, Usuario dado); // Adiciona um dado à fila
+void addFila(Fila *fila, Usuario *dado);
 
 Usuario rmFila(Fila *fila); // Remove e retorna o dado do início da fila
 
-bool filaVazia(Fila *fila); // Verifica se a fila está vazia
+void exibeFila(Fila *fila);
+
+bool filaVazia(Fila *fila);
