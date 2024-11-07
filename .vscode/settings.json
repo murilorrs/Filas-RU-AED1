@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "*.js": "javascriptreact",
+    "*.json": "jsonc",
+    "filas.h": "c",
+    "usuarios.h": "c",
+    "stdio.h": "c",
+    "bancadas.h": "c"
+  }
+}
