@@ -1,4 +1,4 @@
-#include "../../include/bancadas/bancadas.h"
+#include "../../../include/TADs/bancadas/bancadas.h"
 #include <stdio.h>
 
 // Função para inicializar uma bancada

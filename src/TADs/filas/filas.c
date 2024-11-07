@@ -1,9 +1,10 @@
-#include "../../include/filas/filas.h"
+#include "../../../include/TADs/filas/filas.h"
 
-Fila *criarFila() {
+Fila *criarFila(int id) {
   Fila *fila = (Fila *)malloc(sizeof(Fila));
   fila->frente = NULL;
   fila->tras = NULL;
+  fila->id = id;
   return fila;
 }
 
@@ -23,7 +24,7 @@ void addFila(Fila *fila, Usuario *dado) {
 
 Usuario rmFila(Fila *fila) {
   if (fila->frente == NULL) {
-    printf("Fila vazia! Não é possível remover um elemento.\n");
+    printf("Fila vazia!\n");
     exit(1);
   }
 
@@ -41,10 +42,10 @@ Usuario rmFila(Fila *fila) {
 
 void exibeFila(Fila *fila) {
   No *noAtual = fila->frente;
-  printf("USUARIOS NA FILA:\n");
 
+  system("clear");
+  printf("USUARIOS NA FILA %d:\n", fila->id);
   while (noAtual != NULL) {
-    // Exibe cada usuário na mesma linha com formatação de dois dígitos
     printf("ID: %02d | Food1: %02d | Food2: %02d | Food3: %02d | Food4: %02d | Food5: %02d | Food6: %02d | E Vegetariano: %d\n", noAtual->dado.id, noAtual->dado.food1Rate, noAtual->dado.food2Rate,
            noAtual->dado.food3Rate, noAtual->dado.food4Rate, noAtual->dado.food5Rate, noAtual->dado.food6Rate, noAtual->dado.eVegetariano);
     noAtual = noAtual->proximo; // Move para o próximo nó

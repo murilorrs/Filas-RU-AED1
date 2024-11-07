@@ -11,6 +11,7 @@ typedef struct No {
 typedef struct Fila {
   No *frente;
   No *tras;
+  int id;
 } Fila;
 
 Fila *criarFila();
