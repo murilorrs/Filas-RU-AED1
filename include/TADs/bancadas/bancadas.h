@@ -1,24 +1,24 @@
-#ifndef BANCADA_H
-#define BANCADA_H
+#ifndef BANCADAS_H
+#define BANCADAS_H
 
-#include <stdbool.h>
+#include "../filas/filas.h"
+#include "../usuarios/usuarios.h"
 
-// Definições de constantes para quantidade mínima e máxima de bancadas
 #define MIN_BANCADAS 1
 #define MAX_BANCADAS 10
 
-// Estrutura para representar uma bancada
 typedef struct {
-    int id;
-    int totalAtendimentos;
-    float tempoTotalAtendimento;
-    bool vegetariana;
+  int id;
+  int totalAtendimentos;
+  int tempoTotalAtendimento;
+  int vegetariana;
+  int estaVazia;
+  Usuario *usuario; // Usuario que está sendo atendido
 } Bancada;
 
-// Funções relacionadas à bancada
-void inicializaBancada(Bancada* bancada, int id, bool vegetariana);
-void adicionaAtendimento(Bancada* bancada, float tempoAtendimento);
-float calculaMediaAtendimento(Bancada* bancada);
-void chamarBancadaVegetariana(Bancada* bancadaVegetariana, bool clienteVegetariano);
+Bancada *criaBancada(int id, int vegetariana);
+Usuario *chamarParaBancada(Bancada *bancada, Fila *fila);
+void exibeBancada(Bancada *bancada);
+Usuario *removeUsuarioBancada(Bancada *bancada);
 
 #endif
