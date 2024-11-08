@@ -1,5 +1,6 @@
-#include "../include/filas/filas.h"
-#include "../include/usuarios/usuarios.h"
+#include "../include/TADs/bancadas/bancadas.h"
+#include "../include/TADs/filas/filas.h"
+#include "../include/TADs/usuarios/usuarios.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -7,34 +8,59 @@
 int main() {
   iniciaAleatoriedade();
   Fila *fila1 = criarFila(1);
-  Fila *fila2 = criarFila(2);
-  int i = 0;
 
-  while (1) {
+  for (int i = 1; i < 10; i++) {
     Usuario *usuario = criarUsuario(i);
 
     if (usuario != NULL) {
-      int filaEscolhida = rand() % 2;
-
-      if (filaEscolhida == 0) {
-        addFila(fila1, usuario);
-      } else {
-        addFila(fila2, usuario);
-      }
-      i++;
+      addFila(fila1, usuario);
+      exibeFila(fila1);
     } else {
       free(usuario);
     }
-
-    printf("Fila 1:\n");
-    exibeFila(fila1);
-    printf("Fila 2:\n");
-    exibeFila(fila2);
-
-    sleep(1);
   }
 
   rmFila(fila1);
-  rmFila(fila2);
+
+  exibeFila(fila1);
+
+  Bancada *bancada1 = criaBancada(1, 0);
+
+  chamarParaBancada(bancada1, fila1);
+
+  exibeFila(fila1);
+
+  exibeBancada(bancada1);
+
+  // iniciaAleatoriedade();
+  // Fila *fila1 = criarFila(1);
+  // Bancada *bancada1 = inicializaBancada(1, 0);
+
+  // int i = 0;
+
+  // while (1) {
+  //   Usuario *usuario = criarUsuario(i);
+
+  //   if (usuario != NULL) {
+  //     addFila(fila1, usuario);
+  //     i++;
+  //   } else {
+  //     free(usuario);
+  //   }
+
+  //   exibeFila(fila1);
+
+  //   if (bancada1->estaVazia == 1) {
+  //     printf("Bancada 1:\n");
+  //     Usuario *usuario = chamarBancada(bancada1, fila1);
+  //     if (usuario != NULL) {
+  //       printf("Usuario de id %d está na bancada 1\n\n", usuario->id);
+  //     } else {
+  //       printf("Nenhum usuario para atender na bancada 1\n\n");
+  //     }
+  //   }
+  //   sleep(1); // Pausa de 1 segundo
+  // }
+
   return 0;
 }
