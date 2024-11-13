@@ -15,6 +15,7 @@ Bancada *criaBancada(int id, int vegetariana) {
 
 Usuario *chamarParaBancada(Bancada *bancada, Fila *fila) {
   if (fila->frente == NULL) {
+    printf("Fila vazia!\n");
     return NULL; // Caso a fila esteja vazia
   }
 
@@ -32,7 +33,7 @@ Usuario *removeUsuarioBancada(Bancada *bancada) {
   return NULL;
 }
 
-void exibeBancada(Bancada *bancada) { // Essa funcao ta dando segmetation fault algumas vezes, corrigir para nova versao
+void exibeBancada(Bancada *bancada) { // !!! Essa funcao ta dando segmetation fault algumas vezes, corrigir para nova versao
   printf("BANCADA %d:\n", bancada->id);
   printf("Total de atendimentos: %d\n", bancada->totalAtendimentos);
   printf("Tempo total de atendimento: %d\n", bancada->tempoTotalAtendimento);

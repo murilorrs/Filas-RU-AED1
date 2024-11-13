@@ -8,6 +8,8 @@
 #define MAXSERINI 3   // Máximo de serventes ao abrir o RU
 #define QTSERMAX 18   // Qtde máxima de serventes, esse valor pode ser alterado!!!
 #define QTSERMIN 3    // Qtde mínima de serventes, esse valor pode ser alterado!!!
+#define MIN_PERCENT 80
+#define MAX_PERCENT 120
 
 typedef struct {
   int tempoTotalAtendimento;   // Cada vez que o programa executar e o servente estiver ativo deve ser atualizada -- Serve pro cálculo do tempo médio de atendimento
@@ -19,10 +21,12 @@ typedef struct {
 
 Servente *criarServente(int id, int ingredienteServido, int qtdeServentes); // Função para criar mais um servente
 
-bool servirUsuario(Servente *servente, Usuario *user); // Modificar o tipo ingrediente quando implementarem ESSA FUNÇÃO VAI TER O TIPO VASILHA QUANDO IMPLEMENTAR!!!
+bool servirUsuario(Servente *servente, Bancada *bancada); // Modificar o tipo ingrediente quando implementarem ESSA FUNÇÃO VAI TER O TIPO VASILHA QUANDO IMPLEMENTAR!!!
 
 int checaFoodRate(Usuario *user, Servente *servente); // Retorna o foodrate do usuario pra tal tipo de ingrediente
 
 bool checaTempoTrabalho(Servente *servente); // Checa há quanto tempo o usuario ta trabalhando
 
 bool intervaloServente(Servente *servente); // Executa o intervalo de descanso do servente
+
+int calculaQtdeServida(int quantidadeIdeal);
