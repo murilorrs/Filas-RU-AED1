@@ -1,4 +1,5 @@
 #include "../../../include/TADs/servente/servente.h"
+#include "../../../include/TADs/bancadas/bancadas.h"
 #include "../../../include/TADs/usuarios/usuarios.h"
 
 Servente *criarServente(int id, int ingredienteServido, int qtdeServentes) {
@@ -29,13 +30,13 @@ Servente *criarServente(int id, int ingredienteServido, int qtdeServentes) {
   return servente;
 }
 
-bool servirUsuario(Servente *servente, Usuario *user) { // ESSA FUNÇÃO VAI CONTER O TIPO VASILHA QUANDO IMPLEMENTAR!!!
-  if (checaFoodRate(user, servente) < 50) {
+bool servirUsuario(Servente *servente, Bancada *bancada) { // ESSA FUNÇÃO VAI CONTER O TIPO VASILHA QUANDO IMPLEMENTAR!!!
+  if (checaFoodRate(bancada->usuario, servente) < 50) {
     servente->usuariosAtendidos++;
     return true;
   }
 
-  int qtdeAserConsumida = 0; // Calculo da qtde a ser consumida de forma randomica -- item 18 do trabalho -- tem que levar consideração os macros max e min
+  int qtdeAserServida = calculaQtdeServida(bancada->vasilha->ingradiente); // Tem que passar como parametro a quantidade ideal de comida a ser servida
 
   // Vasilha.qtde -= qtdeAserConsumida;
 
@@ -43,25 +44,25 @@ bool servirUsuario(Servente *servente, Usuario *user) { // ESSA FUNÇÃO VAI CON
   return true;
 }
 
-int checaFoodRate(Usuario *user, Servente *servente) {
+int checaFoodRate(Bancada *bancada, Servente *servente) {
   switch (servente->ingredienteAServir) {
   case 1:
-    return user->food1Rate;
+    return bancada->usuario->food1Rate;
 
   case 2:
-    return user->food2Rate;
+    return bancada->usuario->food2Rate;
 
   case 3:
-    return user->food3Rate;
+    return bancada->usuario->food3Rate;
 
   case 4:
-    return user->food4Rate;
+    return bancada->usuario->food4Rate;
 
   case 5:
-    return user->food5Rate;
+    return bancada->usuario->food5Rate;
 
   case 6:
-    return user->food6Rate;
+    return bancada->usuario->food6Rate;
   }
 }
 
@@ -80,4 +81,9 @@ bool checaTempoTrabalho(Servente *servente) {
 bool intervaloServente(Servente *servente) { // Essa função vai fazer o servente ficar 30 segundos fora de trabalho. Preciso ter uma ideia de como vai ser a execução do programa pra definir ela
 
   return false;
+}
+
+int calculaQuantidadeServida(int quantidadeIdeal) {
+  int percentual = (rand() % (MAX_PERCENT - MIN_PERCENT + 1)) + MIN_PERCENT;
+  return (quantidadeIdeal * percentual) / 100;
 }
