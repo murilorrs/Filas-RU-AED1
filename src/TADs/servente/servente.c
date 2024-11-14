@@ -1,27 +1,18 @@
 #include "../../../include/TADs/servente/servente.h"
 #include "../../../include/TADs/bancadas/bancadas.h"
+#include "../../../include/TADs/ingredientes/ingredientes.h"
 #include "../../../include/TADs/usuarios/usuarios.h"
 
-Servente *criarServente(int id, int ingredienteServido, int qtdeServentes) {
+Servente *criarServente(int id) {
 
   Servente *servente = malloc(sizeof(Servente));
 
   if (servente == NULL) {
-    fprintf(stderr, "Erro ao alocar memória para o usuário.\n");
+    fprintf(stderr, "Erro ao alocar memória para o servente.\n");
     exit(1);
   }
 
-  if (qtdeServentes >= QTSERMAX) {
-    fprintf(stderr, "Quantidade de serventes passou do limite estabelecido.\n");
-    exit(1);
-  }
-
-  if (ingredienteServido > 6 || ingredienteServido < 1) {
-    fprintf(stderr, "Parãmetro de ingrediente passado ao criar o servente fora do range.\n");
-    exit(1);
-  }
-
-  servente->ingredienteAServir = ingredienteServido;
+  servente->ingredienteAServir = 0;
   servente->id = id;
   servente->tempoSeguidoAtendimento = 0;
   servente->tempoTotalAtendimento = 0;
@@ -30,18 +21,33 @@ Servente *criarServente(int id, int ingredienteServido, int qtdeServentes) {
   return servente;
 }
 
-bool servirUsuario(Servente *servente, Bancada *bancada) { // ESSA FUNÇÃO VAI CONTER O TIPO VASILHA QUANDO IMPLEMENTAR!!!
-  if (checaFoodRate(bancada->usuario, servente) < 50) {
+void servirUsuario(Bancada *bancada) {
+  for (int i = 0; i < bancada->numServentes; i++) {
+    Servente *servente = bancada->serventes[i];
+
+    if (checaFoodRate(bancada, servente) < 50) {
+      servente->usuariosAtendidos++;
+      continue;
+    }
+
+    // Identifica o ingrediente que o servente deve servir
+    Ingrediente *ingrediente = bancada->vasilhas[servente->ingredienteAServir]->ingrediente;
+    int qtdeAserServida = calculaQuantidadeServida(bancada->vasilhas[servente->ingredienteAServir]->ingrediente->quantidadeIdealPorPorcao);
+
+    // Atualiza a quantidade consumida e os atendimentos do servente
+    ingrediente->quantidadeConsumida += qtdeAserServida;
     servente->usuariosAtendidos++;
-    return true;
+    servente->tempoSeguidoAtendimento++;
+    servente->tempoTotalAtendimento++;
+
+    // Verifica se o servente precisa de intervalo
+    if (checaTempoTrabalho(servente)) {
+      printf("Servente %d entrou em intervalo.\n", servente->id);
+    }
   }
-
-  int qtdeAserServida = calculaQtdeServida(bancada->vasilha->ingradiente); // Tem que passar como parametro a quantidade ideal de comida a ser servida
-
-  // Vasilha.qtde -= qtdeAserConsumida;
-
-  servente->usuariosAtendidos++;
-  return true;
+  bancada->totalAtendimentos++;
+  bancada->tempoTotalAtendimento++;
+  bancada->estaVazia = 1;
 }
 
 int checaFoodRate(Bancada *bancada, Servente *servente) {

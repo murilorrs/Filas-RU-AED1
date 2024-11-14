@@ -1,17 +1,18 @@
-// #include "ingredientes.h"
-// #include <stdio.h>
+#include "../../include/TADs/ingredientes/ingredientes.h"
+#include <stdio.h>
 
-// // // Funcao para definir ingrediente
-// // DEFINIR_INGREDIENTES()
+Ingrediente *criarIngrediente(int nome, int quantidadeIdealPorPorcao) {
+  Ingrediente *ingrediente = (Ingrediente *)malloc(sizeof(Ingrediente));
+  ingrediente->nome = nome;
+  ingrediente->quantidadeConsumida = 0;
+  ingrediente->quantidadeIdealPorPorcao = quantidadeIdealPorPorcao;
+  return ingrediente;
+}
 
-// // // Funcao para definir aceitacao dos ingredientes
-// // DEFINIR_ACEITACAO()
+void consumirIngrediente(Ingrediente *ingrediente, int quantidadeConsumida) { ingrediente->quantidadeConsumida += quantidadeConsumida; }
 
-// // // Funcao para definir quantidades minima e maxima de ingredientes
-// // DEFINIR_QTD_ING()
-
-// // // Funcao para definir tempo de reposicao de ingrediente
-// // DEFINIR_TEMPO_SUBSTITUICAO()
-
-// // // Funcao para definir minimo de substituicao
-// // DEFINIR_MINIMO_SUBSTITUICAO()
+int calcularConsumoTotal(Ingrediente *ingrediente) {
+  int consumoTotal = ingrediente->quantidadeConsumida;
+  free(ingrediente);
+  return consumoTotal;
+}

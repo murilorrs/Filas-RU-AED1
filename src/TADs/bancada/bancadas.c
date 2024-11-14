@@ -1,5 +1,6 @@
 #include "../../../include/TADs/bancadas/bancadas.h"
 #include "../../../include/TADs/filas/filas.h"
+#include "../../../include/TADs/servente/servente.h"
 #include "../../../include/TADs/usuarios/usuarios.h"
 #include <stdio.h>
 
@@ -11,6 +12,17 @@ Bancada *criaBancada(int id, int vegetariana) {
   bancada->vegetariana = vegetariana;
   bancada->estaVazia = 1;
   return bancada;
+}
+
+void addServenteBancada(Bancada *bancada, Servente *servente) {
+  for (int i = 0; i < 6; i++) {
+    if (bancada->serventes[i] == NULL) {
+      bancada->serventes[i] = servente;
+      servente->ingredienteAServir = i + 1;
+      bancada->numServentes++;
+      return;
+    }
+  }
 }
 
 Usuario *chamarParaBancada(Bancada *bancada, Fila *fila) {

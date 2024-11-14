@@ -1,3 +1,7 @@
+#ifndef SERVENTE_H
+#define SERVENTE_H
+
+#include "../bancadas/bancadas.h"
 #include "../usuarios/usuarios.h"
 #include <stdbool.h>
 #include <stdio.h>
@@ -19,14 +23,16 @@ typedef struct {
   int ingredienteAServir; /// Ingrediente (1 a 6 do cardápio) que o servente está servindo
 } Servente;
 
-Servente *criarServente(int id, int ingredienteServido, int qtdeServentes); // Função para criar mais um servente
+Servente *criarServente(int id); // Função para criar mais um servente
 
-bool servirUsuario(Servente *servente, Bancada *bancada); // Modificar o tipo ingrediente quando implementarem ESSA FUNÇÃO VAI TER O TIPO VASILHA QUANDO IMPLEMENTAR!!!
+void servirUsuario(Bancada *bancada); // Modificar o tipo ingrediente quando implementarem
 
-int checaFoodRate(Usuario *user, Servente *servente); // Retorna o foodrate do usuario pra tal tipo de ingrediente
+int checaFoodRate(Bancada *bancada, Servente *servente); // Retorna o foodrate do usuario pra tal tipo de ingrediente
 
 bool checaTempoTrabalho(Servente *servente); // Checa há quanto tempo o usuario ta trabalhando
 
 bool intervaloServente(Servente *servente); // Executa o intervalo de descanso do servente
 
 int calculaQtdeServida(int quantidadeIdeal);
+
+#endif
