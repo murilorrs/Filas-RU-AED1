@@ -9,7 +9,6 @@
 #define MIN_BANCADAS 1
 #define MAX_BANCADAS 10
 
-// o erro vai estar nessa definição aqui das estruturas onde to usando o obj na estrutura antes de ele ser definido
 typedef struct {
   int id;
   int totalAtendimentos;
@@ -23,9 +22,19 @@ typedef struct {
 } Bancada;
 
 Bancada *criaBancada(int id, int vegetariana);
+
 void addServenteBancada(Bancada *bancada, Servente *servente);
+
 Usuario *chamarParaBancada(Bancada *bancada, Fila *fila);
+
 void exibeBancada(Bancada *bancada);
+
+void servirUsuario(Bancada *bancada);
+
 Usuario *removeUsuarioBancada(Bancada *bancada);
+
+int checaFoodRate(Bancada *bancada, Servente *servente);
+
+int calculaQtdeServida(int quantidadeIdeal);
 
 #endif
