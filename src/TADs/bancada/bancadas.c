@@ -1,7 +1,4 @@
 #include "../../../include/TADs/bancadas/bancadas.h"
-#include "../../../include/TADs/filas/filas.h"
-#include "../../../include/TADs/servente/servente.h"
-#include "../../../include/TADs/usuarios/usuarios.h"
 #include <stdio.h>
 
 Bancada *criaBancada(int id, int vegetariana) {

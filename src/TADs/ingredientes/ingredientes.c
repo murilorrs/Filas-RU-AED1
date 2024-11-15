@@ -1,5 +1,4 @@
 #include "../../include/TADs/ingredientes/ingredientes.h"
-#include <stdio.h>
 
 Ingrediente *criarIngrediente(int nome, int quantidadeIdealPorPorcao) {
   Ingrediente *ingrediente = (Ingrediente *)malloc(sizeof(Ingrediente));

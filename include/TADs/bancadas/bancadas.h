@@ -9,6 +9,7 @@
 #define MIN_BANCADAS 1
 #define MAX_BANCADAS 10
 
+// o erro vai estar nessa definição aqui das estruturas onde to usando o obj na estrutura antes de ele ser definido
 typedef struct {
   int id;
   int totalAtendimentos;

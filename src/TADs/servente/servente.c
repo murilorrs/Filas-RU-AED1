@@ -1,7 +1,4 @@
 #include "../../../include/TADs/servente/servente.h"
-#include "../../../include/TADs/bancadas/bancadas.h"
-#include "../../../include/TADs/ingredientes/ingredientes.h"
-#include "../../../include/TADs/usuarios/usuarios.h"
 
 Servente *criarServente(int id) {
 

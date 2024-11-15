@@ -2,6 +2,7 @@
 #define SERVENTE_H
 
 #include "../bancadas/bancadas.h"
+#include "../ingredientes/ingredientes.h"
 #include "../usuarios/usuarios.h"
 #include <stdbool.h>
 #include <stdio.h>
