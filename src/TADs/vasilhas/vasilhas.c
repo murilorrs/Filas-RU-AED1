@@ -21,8 +21,7 @@ bool RemoveQtdeVasilha(Vasilha *vasilha,int qtdeARemover){
   vasilha->quantidade_Atual -= qtdeARemover;
   if (vasilha->quantidade_Atual <= 0)
   {
-    TrocaDeVasilha(vasilha);
-    return false;
+    vasilha->quantidade_Atual = CAPING1;
   }
 
   return true;
