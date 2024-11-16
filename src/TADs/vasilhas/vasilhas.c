@@ -1,8 +1,32 @@
-// #include "../../../include/TADs/vasilhas/vasilhas.h"
-// #include <stdio.h>
+#include "../../../include/TADs/vasilhas/vasilhas.h"
+#include <stdio.h>
 
-// Vasilha *criarVasilha(Vasilha *vasilhas) {
-//   vasilhas->capacidade = CAPING1;
-//   vasilhas->quantidade_Atual = CAPING1;
-//   vasilhas->ingrediente = criarIngrediente();
-// }
+Vasilha *criarVasilha(Ingrediente *ingrediente) {
+
+  Vasilha *vasilha = malloc(sizeof(Vasilha));
+  if (vasilha == NULL) {
+    fprintf(stderr, "Erro ao alocar memória para a vasilha.\n");
+    exit(1);
+  }
+
+  vasilha->capacidade = CAPING1;
+  vasilha->quantidade_Atual = CAPING1;
+  vasilha->ingrediente = ingrediente;
+
+  return vasilha;
+}
+
+bool RemoveQtdeVasilha(Vasilha *vasilha,int qtdeARemover){
+
+  vasilha->quantidade_Atual -= qtdeARemover;
+  if (vasilha->quantidade_Atual <= 0)
+  {
+    TrocaDeVasilha(vasilha);
+    return false;
+  }
+
+  return true;
+}
+
+
+bool TrocaDeVasilha(Vasilha *vasilha); //Função de troca das vasilhas, ainda para ser definida

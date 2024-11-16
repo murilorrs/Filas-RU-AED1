@@ -8,7 +8,9 @@ Ingrediente *criarIngrediente(int nome, int quantidadeIdealPorPorcao) {
   return ingrediente;
 }
 
-void consumirIngrediente(Ingrediente *ingrediente, int quantidadeConsumida) { ingrediente->quantidadeConsumida += quantidadeConsumida; }
+void consumirIngrediente(Ingrediente *ingrediente, int quantidadeConsumida) { 
+  ingrediente->quantidadeConsumida += quantidadeConsumida;
+}
 
 int calcularConsumoTotal(Ingrediente *ingrediente) {
   int consumoTotal = ingrediente->quantidadeConsumida;
