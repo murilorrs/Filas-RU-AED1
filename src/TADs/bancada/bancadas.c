@@ -48,10 +48,11 @@ void servirUsuario(Bancada *bancada) {
 
     // Identifica o ingrediente que o servente deve servir
     Ingrediente *ingrediente = bancada->vasilhas[servente->ingredienteAServir]->ingrediente; // Pega a vasilha i que o servente vai servir e verifica o ingrediente
-    int qtdeAserServida = calculaQtdeServida(bancada->vasilhas[servente->ingredienteAServir]->ingrediente->quantidadeIdealPorPorcao);
+    int qtdeAserServida = calculaQtdeServida(ingrediente->quantidadeIdealPorPorcao);
 
     // Atualiza a quantidade consumida e os atendimentos do servente
-    ingrediente->quantidadeConsumida += qtdeAserServida;
+    ingrediente->quantidadeConsumida += qtdeAserServida; //Incrementa o ingrediente pro relatório final
+    RemoveQtdeVasilha(bancada->vasilhas[servente->ingredienteAServir], qtdeAserServida); //Tira a quantidade consumida da vasilha
     servente->usuariosAtendidos++;
     servente->tempoSeguidoAtendimento++;
     servente->tempoTotalAtendimento++;
