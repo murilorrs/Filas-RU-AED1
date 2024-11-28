@@ -50,3 +50,10 @@ void contaTempoAtendimento(Usuario *usuario) {
     usuario->tempoAtendimento++;
   }
 }
+
+void liberaUsuario(Usuario *usuario, float *tempoTotalEspera, int *numeroDeUsuariosAtendidos, float tempoTotalAtendimento){ //As ultimas 3 devem ser variáveis globais!
+  tempoTotalEspera += usuario->tempoFila;
+  tempoTotalAtendimento += usuario->tempoAtendimento;
+  numeroDeUsuariosAtendidos++;
+  free(usuario);
+}
