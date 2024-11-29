@@ -12,7 +12,7 @@
 
 void relatorioTempoMedioEsperaUsuarios(float tempoTotalEspera, int numeroUsuariosAtendidos){ 
     float tempoEsperaMedioUsuarios = tempoTotalEspera / numeroUsuariosAtendidos;
-    printf(ANSI_COLOR_CYAN "\t Tempo médio de espera dos usuários: %.2f minutos\n" ANSI_COLOR_RESET, tempoEsperaMedioUsuarios);
+    printf(ANSI_COLOR_CYAN "1. Tempo médio de espera dos usuários: %.2f minutos\n" ANSI_COLOR_RESET, tempoEsperaMedioUsuarios);
 }
 
 void relatorioQuantidadeTotalIngrediente(Ingrediente Ingrediente[], int numeroElementos){ 
@@ -33,7 +33,7 @@ void tempoMedioServente(Servente servente[], int numeroElementos){
 
 void tempoMedioAtendimentoUsuarios(float tempoTotalAtendimento, int numeroUsuariosAtendidos){ 
     int tempoMedioAtendimento = tempoTotalAtendimento / numeroUsuariosAtendidos;
-    printf(ANSI_COLOR_CYAN "\t Tempo médio de atendimento dos usuários: %d minutos\n" ANSI_COLOR_RESET, 
+    printf(ANSI_COLOR_CYAN "\n2. Tempo médio de atendimento dos usuários: %d minutos\n" ANSI_COLOR_RESET, 
            tempoMedioAtendimento);
 }
 
@@ -75,10 +75,8 @@ void relatorioFinal(float tempoTotalEspera, int numeroUsuariosAtendidos, float t
     printf(ANSI_COLOR_GREEN "                RELATÓRIO FINAL DO RU\n" ANSI_COLOR_RESET);
     printf(ANSI_COLOR_GREEN "%s\n\n" ANSI_COLOR_RESET, linha2);
 
-    printf(ANSI_COLOR_CYAN "1. Tempo médio de espera dos usuários:\n" ANSI_COLOR_RESET);
     relatorioTempoMedioEsperaUsuarios(tempoTotalEspera, numeroUsuariosAtendidos);
 
-    printf(ANSI_COLOR_CYAN "\n2. Tempo médio de atendimento dos usuários:\n" ANSI_COLOR_RESET);
     tempoMedioAtendimentoUsuarios(tempoTotalAtendimento, numeroUsuariosAtendidos);
 
     printf(ANSI_COLOR_GREEN "\n3. Quantidade total consumida de ingredientes:\n" ANSI_COLOR_RESET);
