@@ -10,7 +10,7 @@ Este projeto é uma implementação de um sistema de filas do Restaurante Univer
 - **Makefile**: Configurações do Makefile para compilar o projeto.
 
 Os arquivos dentro de `include` e `src` são separados em subpastas com a descrição da feature como:
-`src/usuarios` ou `src/serventes`
+`src/Relatorios/relatorios.c` ou `src/TADs/serventes.c`
  
 ## Compilação
 
