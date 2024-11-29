@@ -1,4 +1,4 @@
-#include "../../../include/TADs/bancadas/bancadas.h"
+#include "../../include/TADs/bancadas.h"
 #include <stdio.h>
 
 Bancada *criaBancada(int id, int vegetariana) {
@@ -51,8 +51,8 @@ void servirUsuario(Bancada *bancada) {
     int qtdeAserServida = calculaQtdeServida(ingrediente->quantidadeIdealPorPorcao);
 
     // Atualiza a quantidade consumida e os atendimentos do servente
-    ingrediente->quantidadeConsumida += qtdeAserServida; //Incrementa o ingrediente pro relatório final
-    RemoveQtdeVasilha(bancada->vasilhas[servente->ingredienteAServir], qtdeAserServida); //Tira a quantidade consumida da vasilha
+    ingrediente->quantidadeConsumida += qtdeAserServida;                                 // Incrementa o ingrediente pro relatório final
+    RemoveQtdeVasilha(bancada->vasilhas[servente->ingredienteAServir], qtdeAserServida); // Tira a quantidade consumida da vasilha
     servente->usuariosAtendidos++;
     servente->tempoSeguidoAtendimento++;
     servente->tempoTotalAtendimento++;

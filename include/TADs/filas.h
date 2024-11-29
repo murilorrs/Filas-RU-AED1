@@ -1,7 +1,7 @@
 #ifndef FILAS_H
 #define FILAS_H
 
-#include "../usuarios/usuarios.h"
+#include "./usuarios.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>

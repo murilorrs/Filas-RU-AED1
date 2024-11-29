@@ -29,6 +29,6 @@ void contaTempoFila(Usuario *usuario); // Percorrer a fila e incrementar o tempo
 
 void contaTempoAtendimento(Usuario *usuario); // Conta o tempo total de atendimento desde a criação
 
-void liberaUsuario(Usuario *usuario, float *tempoTotalEspera, int *numeroDeUsuariosAtendidos, float tempoTotalAtendimento); //As ultimas 3 devem ser variáveis globais!
+void liberaUsuario(Usuario *usuario, float *tempoTotalEspera, int *numeroDeUsuariosAtendidos, float tempoTotalAtendimento); // As ultimas 3 devem ser variáveis globais!
 
 #endif

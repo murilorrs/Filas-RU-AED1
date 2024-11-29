@@ -1,6 +1,6 @@
 #ifndef RELATORIOS_H
 
-#include "../TADs/bancadas/bancadas.h"
+#include "../TADs/bancadas.h"
 #include <stdio.h>
 
 void relatorioTempoMedioEsperaUsuarios(float tempoTotalEspera, int numeroUsuariosAtendidos);
@@ -10,6 +10,7 @@ void tempoMedioAtendimentoUsuarios(float tempoTotalAtendimento, int numeroUsuari
 void tempoMedioBancada(Bancada bancada[], int numeroElementos);
 void quantidadeUsuariosAtendidosServente(Servente servente[], int numeroElementos);
 void quantidadeUsuariosAtendidosBancada(Bancada bancada[], int numeroElementos);
-void relatorioFinal(float tempoTotalEspera, int numeroUsuariosAtendidos, float tempoTotalAtendimento, Ingrediente ingredientes[], int numIngredientes, Servente serventes[], int numServentes, Bancada bancadas[], int numBancadas);
+void relatorioFinal(float tempoTotalEspera, int numeroUsuariosAtendidos, float tempoTotalAtendimento, Ingrediente ingredientes[], int numIngredientes, Servente serventes[], int numServentes,
+                    Bancada bancadas[], int numBancadas);
 
-#endif //RELATORIOS_H
+#endif // RELATORIOS_H

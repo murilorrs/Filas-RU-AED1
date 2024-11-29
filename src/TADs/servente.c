@@ -1,4 +1,4 @@
-#include "../../../include/TADs/servente/servente.h"
+#include "../../include/TADs/servente.h"
 
 Servente *criarServente(int id) {
 

@@ -1,8 +1,8 @@
 #ifndef SERVENTE_H
 #define SERVENTE_H
 
-#include "../ingredientes/ingredientes.h"
-#include "../usuarios/usuarios.h"
+#include "./ingredientes.h"
+#include "./usuarios.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>

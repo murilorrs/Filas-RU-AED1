@@ -1,5 +1,5 @@
-#include "../include/TADs/bancadas/bancadas.h"
-#include "../include/TADs/filas/filas.h"
+#include "../include/TADs/bancadas.h"
+#include "../include/TADs/filas.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

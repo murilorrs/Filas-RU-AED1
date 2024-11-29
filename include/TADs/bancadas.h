@@ -1,10 +1,10 @@
 #ifndef BANCADAS_H
 #define BANCADAS_H
 
-#include "../filas/filas.h"
-#include "../servente/servente.h"
-#include "../usuarios/usuarios.h"
-#include "../vasilhas/vasilhas.h"
+#include "./filas.h"
+#include "./servente.h"
+#include "./usuarios.h"
+#include "./vasilhas.h"
 
 #define MIN_BANCADAS 1
 #define MAX_BANCADAS 10

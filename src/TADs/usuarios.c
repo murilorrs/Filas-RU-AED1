@@ -1,4 +1,4 @@
-#include "../../../include/TADs/usuarios/usuarios.h"
+#include "../../include/TADs/usuarios.h"
 
 void iniciaAleatoriedade() { srand(time(NULL)); }
 
@@ -51,7 +51,7 @@ void contaTempoAtendimento(Usuario *usuario) {
   }
 }
 
-void liberaUsuario(Usuario *usuario, float *tempoTotalEspera, int *numeroDeUsuariosAtendidos, float tempoTotalAtendimento){ //As ultimas 3 devem ser variáveis globais!
+void liberaUsuario(Usuario *usuario, float *tempoTotalEspera, int *numeroDeUsuariosAtendidos, float tempoTotalAtendimento) { // As ultimas 3 devem ser variáveis globais!
   tempoTotalEspera += usuario->tempoFila;
   tempoTotalAtendimento += usuario->tempoAtendimento;
   numeroDeUsuariosAtendidos++;
