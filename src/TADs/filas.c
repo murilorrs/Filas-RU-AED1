@@ -44,7 +44,7 @@ Usuario *rmFila(Fila *fila) {
     fila->tras = NULL; // Se a fila ficou vazia, o de trás também vai ser NULL
   }
 
-  printf("\033[0;32mUsuario de id %d foi removido da fila\033[0m\n\n", dado->id);
+  printf("\033[0;32m--->Usuario de id %d foi removido da fila\033[0m\n\n", dado->id);
   free(noRemovido);
 
   return dado;

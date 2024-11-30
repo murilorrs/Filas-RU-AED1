@@ -5,16 +5,25 @@
 #include <time.h>
 
 int main() {
+
+  system("clear");
   iniciaAleatoriedade();
-  // teste manual:
+  printf("\033[1;32mTESTE MANUAL DO SOFTWARE\033[0m\n");
+
   Usuario *usuario1 = criarUsuario(1);
   Usuario *usuario2 = criarUsuario(2);
   Usuario *usuario3 = criarUsuario(3);
   Usuario *usuario4 = criarUsuario(4);
   Usuario *usuario5 = criarUsuario(5);
   Usuario *usuario6 = criarUsuario(6);
+  Usuario *usuario7 = criarUsuario(7);
+  Usuario *usuario8 = criarUsuario(8);
+  Usuario *usuario9 = criarUsuario(9);
+
   Fila *fila1 = criarFila(1);
+
   Bancada *bancada1 = criaBancada(1, 0);
+
   Servente *servente1 = criarServente(1);
   Servente *servente2 = criarServente(2);
   Servente *servente3 = criarServente(3);
@@ -22,43 +31,45 @@ int main() {
   Servente *servente5 = criarServente(5);
   Servente *servente6 = criarServente(6);
 
-  // Enfileirando os usuarios
-  Usuario *usuarios[] = {usuario1, usuario2, usuario3, usuario4, usuario5, usuario6};
-  for (int i = 0; i < 6; i++) {
+  Usuario *usuarios[] = {usuario1, usuario2, usuario3, usuario4, usuario5, usuario6, usuario7, usuario8, usuario9};
+  for (int i = 0; i < 9; i++) {
     if (usuarios[i] != NULL) {
       addFila(fila1, usuarios[i]);
-    } else {
-      free(usuarios[i]);
     }
   }
 
+  printf("\033[1;34mUSUARIOS NA FILA:\033[0m\n");
   exibeFila(fila1);
-  printf("Bancada antes de chamar usuario:\n");
+
+  printf("\033[1;34mBANCADA ANTES DE CHAMAR USUARIO:\033[0m\n");
   exibeBancada(bancada1);
 
   if (bancada1->estaVazia == 1)
     chamarParaBancada(bancada1, fila1);
 
+  printf("\033[1;33mCheckpoint 0\033[0m\n\n");
+
   exibeFila(fila1);
 
-  printf("Bancada depois de chamar usuario:\n");
+  printf("\033[1;34mBANCADA DEPOIS DE CHAMAR USUARIO:\033[0m\n");
   exibeBancada(bancada1);
 
-  addServenteBancada(bancada1, servente1);
-  addServenteBancada(bancada1, servente2);
-  addServenteBancada(bancada1, servente3);
-  addServenteBancada(bancada1, servente4);
-  addServenteBancada(bancada1, servente5);
-  addServenteBancada(bancada1, servente6);
+  Servente *serventes[] = {servente1, servente2, servente3, servente4, servente5, servente6};
+  for (int i = 0; i < 6; i++) {
+    addServenteBancada(bancada1, serventes[i]);
+  }
 
-  printf("Bancada depois de adicionar serventes:\n");
+  printf("\033[1;34mBANCADA DEPOIS DE ADICIONAR SERVENTES:\033[0m\n");
   exibeBancada(bancada1);
 
   if (bancada1->estaVazia == 0) {
     servirUsuario(bancada1);
+    // TODO (caio): Aqui ta dando segmentation fault as vezes
   }
 
-  printf("Bancada depois de servir usuario:\n");
+  printf("\033[1;33mCheckpoint 1\033[0m\n\n");
+
+  printf("\033[1;34mBANCADA DEPOIS DE SERVIR USUARIO:\033[0m\n");
   exibeBancada(bancada1);
 
   // teste automatico

@@ -1,5 +1,4 @@
 #include "../../include/TADs/vasilhas.h"
-#include "../../include/TADs/ingredientes.h"
 #include <stdio.h>
 
 Vasilha *criarVasilha(Ingrediente *ingrediente) {
@@ -17,14 +16,17 @@ Vasilha *criarVasilha(Ingrediente *ingrediente) {
   return vasilha;
 }
 
-bool RemoveQtdeVasilha(Vasilha *vasilha, int qtdeARemover) {
-
-  vasilha->quantidade_Atual -= qtdeARemover;
-  if (vasilha->quantidade_Atual <= 0) {
-    vasilha->quantidade_Atual = CAPING1;
-  }
-
+bool TrocaDeVasilha(Vasilha *vasilha) {
+  vasilha->quantidade_Atual = CAPING1;
   return true;
 }
 
-bool TrocaDeVasilha(Vasilha *vasilha); // Função de troca das vasilhas, ainda para ser definida
+bool RemoveQtdeVasilha(Vasilha *vasilha, int qtdeARemover) {
+
+  if (vasilha->quantidade_Atual <= qtdeARemover) {
+    TrocaDeVasilha(vasilha);
+  }
+  vasilha->quantidade_Atual -= qtdeARemover;
+
+  return true;
+}

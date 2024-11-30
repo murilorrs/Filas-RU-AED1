@@ -27,11 +27,11 @@ void addServenteBancada(Bancada *bancada, Servente *servente);
 
 Usuario *chamarParaBancada(Bancada *bancada, Fila *fila);
 
+void exibeQuantidadeAtualVasilhas(Bancada *bancada);
+
 void exibeBancada(Bancada *bancada);
 
 void servirUsuario(Bancada *bancada);
-
-Usuario *removeUsuarioBancada(Bancada *bancada);
 
 int checaFoodRate(Bancada *bancada, Servente *servente);
 

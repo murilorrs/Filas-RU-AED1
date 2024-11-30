@@ -13,4 +13,4 @@ Vasilha *criarVasilha(Ingrediente *ingrediente);
 
 bool RemoveQtdeVasilha(Vasilha *vasilha, int qtdeARemover);
 
-bool TrocaDeVasilha(); // Função para trocar vasilhas, ainda para ser definida.
+bool TrocaDeVasilha(Vasilha *vasilha);

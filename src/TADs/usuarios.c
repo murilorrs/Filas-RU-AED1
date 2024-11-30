@@ -24,6 +24,7 @@ Usuario *criarUsuario(int id) {
   usuario->food4Rate = rand() % 101;
   usuario->food5Rate = rand() % 101;
   usuario->food6Rate = rand() % 101;
+  usuario->tempoFila = 0;
 
   int vegetariano = rand() % 11;
 
@@ -31,8 +32,6 @@ Usuario *criarUsuario(int id) {
     usuario->eVegetariano = 1;
   else
     usuario->eVegetariano = 0;
-
-  usuario->tempoFila = 0;
 
   return usuario;
 }
