@@ -6,7 +6,7 @@ Vasilha *criarVasilha(Ingrediente *ingrediente) {
 
   Vasilha *vasilha = malloc(sizeof(Vasilha));
   if (vasilha == NULL) {
-    fprintf(stderr, "Erro ao alocar memória para a vasilha.\n");
+    fprintf(stderr, "\033[0;31mERROR: Falha na alocação de memória para vasilia\033[0m\n");
     exit(1);
   }
 

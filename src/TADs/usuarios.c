@@ -6,7 +6,7 @@ Usuario *criarUsuario(int id) {
 
   Usuario *usuario = malloc(sizeof(Usuario));
   if (usuario == NULL) {
-    fprintf(stderr, "Erro ao alocar memória para o usuário.\n");
+    fprintf(stderr, "\033[0;31mERROR: Falha na alocação de memória para usuario\033[0m\n");
     exit(1);
   }
 

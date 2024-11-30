@@ -3,15 +3,28 @@
 
 Bancada *criaBancada(int id, int vegetariana) {
   Bancada *bancada = malloc(sizeof(Bancada));
+  if (bancada == NULL) {
+    printf("\033[0;31mERROR: Falha na alocação de memória para bancada\033[0m\n");
+    return NULL;
+  }
+
   bancada->id = id;
   bancada->totalAtendimentos = 0;
   bancada->tempoTotalAtendimento = 0;
   bancada->vegetariana = vegetariana;
   bancada->estaVazia = 1;
+  bancada->numServentes = 0;
+  bancada->usuario = NULL;
+
   return bancada;
 }
 
 void addServenteBancada(Bancada *bancada, Servente *servente) {
+  if (bancada == NULL || servente == NULL) {
+    fprintf(stderr, "\033[0;31mERROR: Bancada ou servente NULL\033[0m\n");
+    return;
+  }
+
   for (int i = 0; i < 6; i++) {
     if (bancada->serventes[i] == NULL) {
       bancada->serventes[i] = servente;
@@ -20,6 +33,7 @@ void addServenteBancada(Bancada *bancada, Servente *servente) {
       return;
     }
   }
+  fprintf(stderr, "\033[0;31mERROR: Não há espaço para mais serventes na bancada\033[0m\n");
 }
 
 Usuario *chamarParaBancada(Bancada *bancada, Fila *fila) {
@@ -34,7 +48,6 @@ Usuario *chamarParaBancada(Bancada *bancada, Fila *fila) {
     bancada->usuario = usuario;
     return usuario; // Retorna o ponteiro para o usuário se precisar usar em algum caso
   }
-  return NULL; // Caso não tenha usuário para atender
 }
 
 void servirUsuario(Bancada *bancada) {
@@ -59,7 +72,7 @@ void servirUsuario(Bancada *bancada) {
 
     // Verifica se o servente precisa de intervalo
     if (checaTempoTrabalho(servente)) {
-      printf("Servente %d entrou em intervalo.\n", servente->id);
+      printf("\033[0;31mServente %d entrou em intervalo.\033[0m\n", servente->id);
     }
   }
   bancada->totalAtendimentos++;
@@ -96,13 +109,36 @@ Usuario *removeUsuarioBancada(Bancada *bancada) {
   return NULL;
 }
 
-void exibeBancada(Bancada *bancada) { // !!! Essa funcao ta dando segmetation fault algumas vezes, corrigir para nova versao
+void exibeBancada(Bancada *bancada) {
+  if (bancada == NULL) {
+    fprintf(stderr, "\033[0;31mERROR: Bancada NULL\033[0m\n");
+    return;
+  }
+
   printf("BANCADA %d:\n", bancada->id);
   printf("Total de atendimentos: %d\n", bancada->totalAtendimentos);
   printf("Tempo total de atendimento: %d\n", bancada->tempoTotalAtendimento);
   printf("Vegetariana: %d\n", bancada->vegetariana);
   printf("Esta vazia: %d\n", bancada->estaVazia);
-  printf("Usuario na bancada: %d\n\n", bancada->usuario->id);
+
+  if (bancada->usuario != NULL) {
+    printf("Usuario na bancada: %d\n\n", bancada->usuario->id);
+  } else {
+    printf("Usuario na bancada: Nenhum\n\n");
+  }
+
+  // printf("Serventes na bancada:\n");
+  // for (int i = 0; i < 6; i++) {
+  //   if (bancada->serventes[i] != NULL) {
+  //     printf("Servente %d\n", bancada->serventes[i]->id);
+  //     printf("Tempo total de atendimento: %d\n", bancada->serventes[i]->tempoTotalAtendimento);
+  //     printf("Tempo seguido de atendimento: %d\n", bancada->serventes[i]->tempoSeguidoAtendimento);
+  //     printf("Usuarios atendidos: %d\n", bancada->serventes[i]->usuariosAtendidos);
+  //     printf("Ingrediente a servir: %d\n\n", bancada->serventes[i]->ingredienteAServir);
+  //   } else {
+  //     printf("Servente %d: Nenhum servente alocado.\n", i + 1);
+  //   }
+  // }
 }
 
 int calculaQtdeServida(int quantidadeIdeal) {
