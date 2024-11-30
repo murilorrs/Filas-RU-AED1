@@ -1,12 +1,10 @@
 #include "../../include/TADs/servente.h"
 
 Servente *criarServente(int id) {
-
   Servente *servente = malloc(sizeof(Servente));
-
   if (servente == NULL) {
-    fprintf(stderr, "Erro ao alocar memória para o servente.\n");
-    exit(1);
+    fprintf(stderr, "\033[0;31mERROR: Falha na alocação de memória para servente\033[0m\n");
+    exit(EXIT_FAILURE);
   }
 
   servente->ingredienteAServir = 0;

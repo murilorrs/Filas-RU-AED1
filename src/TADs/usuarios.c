@@ -6,7 +6,7 @@ Usuario *criarUsuario(int id) {
 
   Usuario *usuario = malloc(sizeof(Usuario));
   if (usuario == NULL) {
-    fprintf(stderr, "Erro ao alocar memória para o usuário.\n");
+    fprintf(stderr, "\033[0;31mERROR: Falha na alocação de memória para usuario\033[0m\n");
     exit(1);
   }
 
@@ -24,6 +24,7 @@ Usuario *criarUsuario(int id) {
   usuario->food4Rate = rand() % 101;
   usuario->food5Rate = rand() % 101;
   usuario->food6Rate = rand() % 101;
+  usuario->tempoFila = 0;
 
   int vegetariano = rand() % 11;
 
@@ -31,8 +32,6 @@ Usuario *criarUsuario(int id) {
     usuario->eVegetariano = 1;
   else
     usuario->eVegetariano = 0;
-
-  usuario->tempoFila = 0;
 
   return usuario;
 }
