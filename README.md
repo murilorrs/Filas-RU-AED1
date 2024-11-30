@@ -28,6 +28,15 @@ O executável e os arquivos objetos (.o) serão gerados na pasta `build/`.
   ```bash
   g++ -Iinclude $(find src -name "*.c") -o build/restaurante
   ```
+  ou
+
+  ```bash
+  gcc -o build/programa \
+src/main.c src/TADs/*.c src/Relatorios/*.c \
+-Iinclude/TADs -Iinclude/Relatorios
+
+  ```
+
 
 ## Execução
 
