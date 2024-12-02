@@ -1,5 +1,6 @@
 #include "../include/TADs/bancadas.h"
 #include "../include/TADs/filas.h"
+#include "../include/TADs/ingredientes.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -22,7 +23,14 @@ int main() {
 
   Fila *fila1 = criarFila(1);
 
-  Bancada *bancada1 = criaBancada(1, 0);
+  Ingrediente *ingrediente1 = criaIngrediente(1, 300);
+  Ingrediente *ingrediente2 = criaIngrediente(2, 300);
+  Ingrediente *ingrediente3 = criaIngrediente(3, 300);
+  Ingrediente *ingrediente4 = criaIngrediente(4, 300);
+  Ingrediente *ingrediente5 = criaIngrediente(5, 300);
+  Ingrediente *ingrediente6 = criaIngrediente(6, 300);
+
+  Bancada *bancada1 = criaBancada(1, 0, ingrediente1, ingrediente2, ingrediente3, ingrediente4, ingrediente5, ingrediente6);
 
   Servente *servente1 = criarServente(1);
   Servente *servente2 = criarServente(2);
@@ -56,8 +64,15 @@ int main() {
 
   Servente *serventes[] = {servente1, servente2, servente3, servente4, servente5, servente6};
   for (int i = 0; i < 6; i++) {
-    addServenteBancada(bancada1, serventes[i]);
+    if (serventes[i] != NULL) {
+      printf("\nAdicionando servente ID: %d\n", serventes[i]->id);
+      addServenteBancada(bancada1, serventes[i]); // Adiciona servente à bancada
+      printf("Servente ID %d adicionado com sucesso.\n", serventes[i]->id);
+    } else {
+      fprintf(stderr, "\033[0;31mERROR: Servente %d é NULL e não pode ser adicionado à bancada.\033[0m\n", i + 1);
+    }
   }
+  printf("Loop de adição de serventes concluído.\n");
 
   printf("\033[1;34mBANCADA DEPOIS DE ADICIONAR SERVENTES:\033[0m\n");
   exibeBancada(bancada1);

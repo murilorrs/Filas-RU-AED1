@@ -1,12 +1,20 @@
 #include "../../include/TADs/bancadas.h"
 #include <stdio.h>
 
-Bancada *criaBancada(int id, int vegetariana) {
+Bancada *criaBancada(int id, int vegetariana, Ingrediente *ingrediente1, Ingrediente *ingrediente2, Ingrediente *ingrediente3, Ingrediente *ingrediente4, Ingrediente *ingrediente5,
+                     Ingrediente *ingrediente6) {
   Bancada *bancada = malloc(sizeof(Bancada));
   if (bancada == NULL) {
     printf("\033[0;31mERROR: Falha na alocação de memória para bancada\033[0m\n");
     return NULL;
   }
+
+  bancada->vasilhas[0] = criaVasilha(ingrediente1);
+  bancada->vasilhas[1] = criaVasilha(ingrediente2);
+  bancada->vasilhas[2] = criaVasilha(ingrediente3);
+  bancada->vasilhas[3] = criaVasilha(ingrediente4);
+  bancada->vasilhas[4] = criaVasilha(ingrediente5);
+  bancada->vasilhas[5] = criaVasilha(ingrediente6);
 
   bancada->id = id;
   bancada->totalAtendimentos = 0;
@@ -77,12 +85,17 @@ void servirUsuario(Bancada *bancada) {
   for (int i = 0; i < 6; i++) {
     Servente *servente = bancada->serventes[i];
 
-    printf("Servente %d está servindo o usuário %d.\n", servente->id, bancada->usuario->id);
-
     if (servente == NULL) {
-      fprintf(stderr, "\033[0;31mERROR: Servente NULL\033[0m\n");
+      fprintf(stderr, "\033[0;31mERROR: Servente %d é NULL.\033[0m\n", i + 1);
       continue;
     }
+
+    if (bancada->usuario == NULL) {
+      fprintf(stderr, "\033[0;31mERROR: Não há usuário na bancada.\033[0m\n");
+      return;
+    }
+
+    servente->ingredienteAServir = i;
 
     int foodRate = checaFoodRate(bancada, servente);
     if (foodRate < 0 || foodRate > 100) {
@@ -98,33 +111,38 @@ void servirUsuario(Bancada *bancada) {
       continue;
     }
 
+    printf("\033[1;33mCheckpoint 2\033[0m\n\n");
+
     // Verifica se o índice de ingredienteAServir é válido
     if (servente->ingredienteAServir < 0 || servente->ingredienteAServir >= 6) {
       fprintf(stderr, "\033[0;31mERROR: IngredienteAServir inválido para servente %d: %d\033[0m\n", servente->id, servente->ingredienteAServir);
       continue;
     }
 
+    // Verifica a vasilha
     if (bancada->vasilhas[servente->ingredienteAServir] == NULL) {
-      fprintf(stderr, "\033[0;31mERROR: Vasilha %d é NULL para servente %d\033[0m\n", servente->ingredienteAServir, servente->id);
+      fprintf(stderr, "\033[0;31mERROR: Vasilha %d é NULL para servente %d.\033[0m\n", servente->ingredienteAServir, servente->id);
       continue;
     }
 
-    Ingrediente *ingrediente = bancada->vasilhas[servente->ingredienteAServir]->ingrediente;
+    Ingrediente *ingrediente = bancada->vasilhas[i]->ingrediente;
 
     if (ingrediente == NULL) {
-      fprintf(stderr, "\033[0;31mERROR: Ingrediente NULL para servente %d na vasilha %d\033[0m\n", servente->id, servente->ingredienteAServir);
+      fprintf(stderr, "\033[0;31mERROR: Ingrediente NULL para servente %d na vasilha %d.\033[0m\n", servente->id, servente->ingredienteAServir);
       continue;
     }
 
     if (ingrediente->quantidadeIdealPorPorcao <= 0) {
-      fprintf(stderr, "\033[0;31mERROR: Quantidade ideal por porcao inválida (%d) para ingrediente de servente %d\033[0m\n", ingrediente->quantidadeIdealPorPorcao, servente->id);
+      fprintf(stderr, "\033[0;31mERROR: Quantidade ideal por porção inválida (%d) para ingrediente de servente %d.\033[0m\n", ingrediente->quantidadeIdealPorPorcao, servente->id);
       continue;
     }
+
+    printf("\033[1;33mCheckpoint 3\033[0m\n\n");
 
     int qtdeAserServida = calculaQtdeServida(ingrediente->quantidadeIdealPorPorcao);
 
     if (qtdeAserServida <= 0) {
-      fprintf(stderr, "\033[0;31mERROR: Quantidade a ser servida inválida (%d) para ingrediente de servente %d\033[0m\n", qtdeAserServida, servente->id);
+      fprintf(stderr, "\033[0;31mERROR: Quantidade a ser servida inválida (%d) para ingrediente de servente %d.\033[0m\n", qtdeAserServida, servente->id);
       continue;
     }
 
@@ -134,6 +152,8 @@ void servirUsuario(Bancada *bancada) {
     servente->usuariosAtendidos++;
     servente->tempoSeguidoAtendimento++;
     servente->tempoTotalAtendimento++;
+
+    printf("\033[1;33mCheckpoint 4\033[0m\n\n");
 
     if (checaTempoTrabalho(servente)) {
       printf("\033[0;31mServente %d entrou em intervalo.\033[0m\n", servente->id);
@@ -199,7 +219,17 @@ void exibeBancada(Bancada *bancada) {
     fprintf(stderr, "\033[0;31mERROR: Bancada ou serventes NULL\033[0m\n");
     return;
   }
-
+  printf("Vasilhas na bancada:\n");
+  for (int i = 0; i < 6; i++) {
+    if (bancada->vasilhas[i] != NULL) {
+      printf("Vasilha %d:\n", i + 1);
+      printf("Ingrediente: %s\n", bancada->vasilhas[i]->ingrediente->nome);
+      printf("Quantidade consumida: %d\n", bancada->vasilhas[i]->ingrediente->quantidadeConsumida);
+      printf("Quantidade ideal por porção: %d\n\n", bancada->vasilhas[i]->ingrediente->quantidadeIdealPorPorcao);
+    } else {
+      printf("Vasilha %d: Nenhuma vasilha alocada.\n", i + 1);
+    }
+  }
   // printf("Serventes na bancada:\n");
   // for (int i = 0; i < 6; i++) {
   //   if (bancada->serventes[i] != NULL) {
@@ -216,15 +246,4 @@ void exibeBancada(Bancada *bancada) {
   //     printf("Servente %d: Nenhum servente alocado.\n", i + 1);
   //   }
   // }
-}
-
-void exibeQuantidadeAtualVasilhas(Bancada *bancada) {
-  printf("\nQuantidade atual das vasilhas:\n");
-  for (int i = 0; i < 6; i++) {
-    if (bancada->vasilhas[i] != NULL) {
-      printf("Vasilha %d - Quantidade Atual: %d gramas\n", i + 1, bancada->vasilhas[i]->quantidade_Atual);
-    } else {
-      printf("Vasilha %d - Não está disponível.\n", i + 1);
-    }
-  }
 }

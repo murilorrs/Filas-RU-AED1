@@ -13,7 +13,7 @@ typedef struct {
 
 // const char *listaIngredientes[] = {"Arroz", "Feijão", "Carne", "Salada", "Macarrão", "Frango", "Batata", "Molho", "Queijo", "Ovos", "Legumes", "Frutas"};
 
-Ingrediente *criarIngrediente(int nome, int quantidadeIdealPorPorcao);
+Ingrediente *criaIngrediente(int nome, int quantidadeIdealPorPorcao);
 
 void consumirIngrediente(Ingrediente *ingrediente, int quantidadeConsumida);
 
