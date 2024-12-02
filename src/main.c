@@ -55,8 +55,6 @@ int main() {
   if (bancada1->estaVazia == 1)
     chamarParaBancada(bancada1, fila1);
 
-  printf("\033[1;33mCheckpoint 0\033[0m\n\n");
-
   exibeFila(fila1);
 
   printf("\033[1;34mBANCADA DEPOIS DE CHAMAR USUARIO:\033[0m\n");
@@ -64,25 +62,18 @@ int main() {
 
   Servente *serventes[] = {servente1, servente2, servente3, servente4, servente5, servente6};
   for (int i = 0; i < 6; i++) {
-    if (serventes[i] != NULL) {
-      printf("\nAdicionando servente ID: %d\n", serventes[i]->id);
+    if (serventes[i] != NULL)
       addServenteBancada(bancada1, serventes[i]); // Adiciona servente à bancada
-      printf("Servente ID %d adicionado com sucesso.\n", serventes[i]->id);
-    } else {
-      fprintf(stderr, "\033[0;31mERROR: Servente %d é NULL e não pode ser adicionado à bancada.\033[0m\n", i + 1);
-    }
   }
-  printf("Loop de adição de serventes concluído.\n");
 
   printf("\033[1;34mBANCADA DEPOIS DE ADICIONAR SERVENTES:\033[0m\n");
   exibeBancada(bancada1);
 
+  printf("\033[1;34mSERVINDO USUARIO:\033[0m\n");
+
   if (bancada1->estaVazia == 0) {
     servirUsuario(bancada1);
-    // TODO (caio): Aqui ta dando segmentation fault as vezes
   }
-
-  printf("\033[1;33mCheckpoint 1\033[0m\n\n");
 
   printf("\033[1;34mBANCADA DEPOIS DE SERVIR USUARIO:\033[0m\n");
   exibeBancada(bancada1);
