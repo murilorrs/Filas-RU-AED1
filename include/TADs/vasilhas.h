@@ -9,7 +9,7 @@ typedef struct {
   Ingrediente *ingrediente;
 } Vasilha;
 
-Vasilha *criarVasilha(Ingrediente *ingrediente);
+Vasilha *criaVasilha(Ingrediente *ingrediente);
 
 bool RemoveQtdeVasilha(Vasilha *vasilha, int qtdeARemover);
 

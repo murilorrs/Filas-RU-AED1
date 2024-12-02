@@ -1,5 +1,6 @@
 #include "../include/TADs/bancadas.h"
 #include "../include/TADs/filas.h"
+#include "../include/TADs/ingredientes.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -22,7 +23,14 @@ int main() {
 
   Fila *fila1 = criarFila(1);
 
-  Bancada *bancada1 = criaBancada(1, 0);
+  Ingrediente *ingrediente1 = criaIngrediente(1, 300);
+  Ingrediente *ingrediente2 = criaIngrediente(2, 300);
+  Ingrediente *ingrediente3 = criaIngrediente(3, 300);
+  Ingrediente *ingrediente4 = criaIngrediente(4, 300);
+  Ingrediente *ingrediente5 = criaIngrediente(5, 300);
+  Ingrediente *ingrediente6 = criaIngrediente(6, 300);
+
+  Bancada *bancada1 = criaBancada(1, 0, ingrediente1, ingrediente2, ingrediente3, ingrediente4, ingrediente5, ingrediente6);
 
   Servente *servente1 = criarServente(1);
   Servente *servente2 = criarServente(2);
@@ -47,8 +55,6 @@ int main() {
   if (bancada1->estaVazia == 1)
     chamarParaBancada(bancada1, fila1);
 
-  printf("\033[1;33mCheckpoint 0\033[0m\n\n");
-
   exibeFila(fila1);
 
   printf("\033[1;34mBANCADA DEPOIS DE CHAMAR USUARIO:\033[0m\n");
@@ -56,18 +62,18 @@ int main() {
 
   Servente *serventes[] = {servente1, servente2, servente3, servente4, servente5, servente6};
   for (int i = 0; i < 6; i++) {
-    addServenteBancada(bancada1, serventes[i]);
+    if (serventes[i] != NULL)
+      addServenteBancada(bancada1, serventes[i]); // Adiciona servente à bancada
   }
 
   printf("\033[1;34mBANCADA DEPOIS DE ADICIONAR SERVENTES:\033[0m\n");
   exibeBancada(bancada1);
 
+  printf("\033[1;34mSERVINDO USUARIO:\033[0m\n");
+
   if (bancada1->estaVazia == 0) {
     servirUsuario(bancada1);
-    // TODO (caio): Aqui ta dando segmentation fault as vezes
   }
-
-  printf("\033[1;33mCheckpoint 1\033[0m\n\n");
 
   printf("\033[1;34mBANCADA DEPOIS DE SERVIR USUARIO:\033[0m\n");
   exibeBancada(bancada1);

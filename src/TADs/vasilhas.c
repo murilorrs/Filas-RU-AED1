@@ -1,7 +1,7 @@
 #include "../../include/TADs/vasilhas.h"
 #include <stdio.h>
 
-Vasilha *criarVasilha(Ingrediente *ingrediente) {
+Vasilha *criaVasilha(Ingrediente *ingrediente) {
 
   Vasilha *vasilha = malloc(sizeof(Vasilha));
   if (vasilha == NULL) {

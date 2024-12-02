@@ -21,7 +21,8 @@ typedef struct {
   Vasilha *vasilhas[6];   // Vasilha que está sendo usada
 } Bancada;
 
-Bancada *criaBancada(int id, int vegetariana);
+Bancada *criaBancada(int id, int vegetariana, Ingrediente *ingrediente1, Ingrediente *ingrediente2, Ingrediente *ingrediente3, Ingrediente *ingrediente4, Ingrediente *ingrediente5,
+                     Ingrediente *ingrediente6);
 
 void addServenteBancada(Bancada *bancada, Servente *servente);
 
