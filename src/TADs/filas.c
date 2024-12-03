@@ -1,6 +1,6 @@
 #include "../../include/TADs/filas.h"
 
-Fila *criarFila(int id) {
+Fila *criarFila(int id, int eVegetariana) {
   Fila *fila = (Fila *)malloc(sizeof(Fila));
   if (fila == NULL) {
     printf("\033[0;31mERROR: Falha na alocação de memória para fila\033[0m\n");
@@ -9,6 +9,8 @@ Fila *criarFila(int id) {
   fila->frente = NULL;
   fila->tras = NULL;
   fila->id = id;
+  fila->eVegetariana = eVegetariana;
+
   return fila;
 }
 
@@ -44,7 +46,7 @@ Usuario *rmFila(Fila *fila) {
     fila->tras = NULL; // Se a fila ficou vazia, o de trás também vai ser NULL
   }
 
-  printf("\033[0;32m--->Usuario de id %d foi removido da fila\033[0m\n\n", dado->id);
+  printf("\033[0;32m--->USUARIO DE ID %d VAI SAIR DA FILA\033[0m\n\n", dado->id);
   free(noRemovido);
 
   return dado;
@@ -53,14 +55,25 @@ Usuario *rmFila(Fila *fila) {
 void exibeFila(Fila *fila) {
   No *noAtual = fila->frente;
 
-  // system("clear");
-  printf("USUARIOS NA FILA %d:\n\n", fila->id);
+  if (fila->eVegetariana == 1) {
+    printf("\033[0;34mUSUARIOS NA FILA %d \033[0;32m(Veg):\n\n\033[0m", fila->id);
+  } else {
+    printf("\033[0;34mUSUARIOS NA FILA %d:\n\n\033[0m", fila->id);
+  }
+
   while (noAtual != NULL) {
     printf("ID: %02d | Food1: %02d | Food2: %02d | Food3: %02d | Food4: %02d | Food5: %02d | Food6: %02d | E Vegetariano: %d\n\n", noAtual->dado->id, noAtual->dado->food1Rate,
            noAtual->dado->food2Rate, noAtual->dado->food3Rate, noAtual->dado->food4Rate, noAtual->dado->food5Rate, noAtual->dado->food6Rate, noAtual->dado->eVegetariano);
     noAtual = noAtual->proximo; // Move para o próximo nó
   }
+
   printf("\n\n");
 }
 
-bool filaVazia(Fila *fila) { return fila->frente == NULL; }
+bool filaVazia(Fila *fila) {
+  if (fila->frente == NULL) {
+    return true;
+  } else {
+    return false;
+  }
+}

@@ -6,8 +6,7 @@
 #include "./usuarios.h"
 #include "./vasilhas.h"
 
-#define MIN_BANCADAS 1
-#define MAX_BANCADAS 10
+#define NUM_BANCADAS 3
 
 typedef struct {
   int id;

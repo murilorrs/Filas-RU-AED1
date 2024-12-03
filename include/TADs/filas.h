@@ -15,9 +15,10 @@ typedef struct {
   No *frente;
   No *tras;
   int id;
+  int eVegetariana;
 } Fila;
 
-Fila *criarFila(int id);
+Fila *criarFila(int id, int eVegetariana);
 
 void addFila(Fila *fila, Usuario *dado);
 

@@ -10,9 +10,9 @@ Usuario *criarUsuario(int id) {
     exit(1);
   }
 
-  int chanceDeSerGerado = rand() % 2;
+  int chanceDeSerGerado = rand() % 10;
 
-  if (chanceDeSerGerado == 0) {
+  if (chanceDeSerGerado < 7) {
     free(usuario);
     return NULL;
   }
@@ -28,7 +28,7 @@ Usuario *criarUsuario(int id) {
 
   int vegetariano = rand() % 11;
 
-  if (vegetariano > 7)
+  if (vegetariano > 5)
     usuario->eVegetariano = 1;
   else
     usuario->eVegetariano = 0;
