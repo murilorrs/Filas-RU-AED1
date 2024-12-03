@@ -31,7 +31,7 @@ void exibeQuantidadeAtualVasilhas(Bancada *bancada);
 
 void exibeBancada(Bancada *bancada);
 
-void servirUsuario(Bancada *bancada);
+void servirUsuario(Bancada *bancada, int tempoTotalEspera, int numeroDeUsuariosAtendidos, int tempoTotalAtendimento);
 
 int checaFoodRate(Bancada *bancada, Servente *servente);
 
