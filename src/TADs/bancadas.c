@@ -78,9 +78,21 @@ Usuario *chamarParaBancada(Bancada *bancada, Fila *fila) {
   return NULL;
 }
 
-void servirUsuario(Bancada *bancada, int tempoTotalEspera, int numeroDeUsuariosAtendidos, int tempoTotalAtendimento) {
+void servirUsuario(Bancada *bancada, int *tempoTotalEspera, int *numeroDeUsuariosAtendidos, int *tempoTotalAtendimento) {
   if (bancada == NULL) {
     fprintf(stderr, "\033[0;31mERROR: Bancada NULL \033[0m\n");
+    return;
+  }
+  if (tempoTotalEspera == NULL) {
+    fprintf(stderr, "\033[0;31mERROR: TempoTotalEspera NULL \033[0m\n");
+    return;
+  }
+  if (numeroDeUsuariosAtendidos == NULL) {
+    fprintf(stderr, "\033[0;31mERROR: numeroDeUsuariosAtendidos NULL \033[0m\n");
+    return;
+  }
+  if (tempoTotalAtendimento == NULL) {
+    fprintf(stderr, "\033[0;31mERROR: tempoTotalAtendimento NULL \033[0m\n");
     return;
   }
 
