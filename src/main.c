@@ -8,7 +8,10 @@
 
 void embaralharFilas(Fila *filas[], int n);
 
+
+
 int main() {
+  int tempoTotalEspera = 0, numeroDeUsuariosAtendidos = 0, tempoTotalAtendimento = 0;
   iniciaAleatoriedade();
   printf("\033[1;32mTESTE AUTOMÁTICO DO SOFTWARE\033[0m\n");
 

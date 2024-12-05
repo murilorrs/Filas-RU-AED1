@@ -78,9 +78,21 @@ Usuario *chamarParaBancada(Bancada *bancada, Fila *fila) {
   return NULL;
 }
 
-void servirUsuario(Bancada *bancada) {
+void servirUsuario(Bancada *bancada, int *tempoTotalEspera, int *numeroDeUsuariosAtendidos, int *tempoTotalAtendimento) {
   if (bancada == NULL) {
     fprintf(stderr, "\033[0;31mERROR: Bancada NULL \033[0m\n");
+    return;
+  }
+  if (tempoTotalEspera == NULL) {
+    fprintf(stderr, "\033[0;31mERROR: TempoTotalEspera NULL \033[0m\n");
+    return;
+  }
+  if (numeroDeUsuariosAtendidos == NULL) {
+    fprintf(stderr, "\033[0;31mERROR: numeroDeUsuariosAtendidos NULL \033[0m\n");
+    return;
+  }
+  if (tempoTotalAtendimento == NULL) {
+    fprintf(stderr, "\033[0;31mERROR: tempoTotalAtendimento NULL \033[0m\n");
     return;
   }
 
@@ -127,8 +139,13 @@ void servirUsuario(Bancada *bancada) {
 
   bancada->totalAtendimentos++;
   bancada->estaVazia = 1;
-  bancada->usuario = NULL;
-  // TODO (Caio): Retirar daqui as informações pro relatório do usuário e depois liberar a memória
+
+  numeroDeUsuariosAtendidos, tempoTotalAtendimento;
+  tempoTotalEspera += bancada->usuario->tempoFila;
+  tempoTotalAtendimento += bancada->usuario->tempoAtendimento;
+  numeroDeUsuariosAtendidos++;
+  free(bancada->usuario);
+  bancada->usuario = NULL;  
 }
 
 int checaFoodRate(Bancada *bancada, Servente *servente) {
