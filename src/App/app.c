@@ -127,7 +127,6 @@ void realizarSimulacao(int totalCiclos, int periodo) {
 
     if (filaVazia(fila1Cm) && filaVazia(fila2Cm) && filaVazia(fila3Cm) && filaVazia(fila4Cm)) {
       todosUsuariosAtendidos = 1;
-      return;
     }
 
     Sleep(1000);
