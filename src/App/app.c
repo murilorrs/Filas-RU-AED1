@@ -57,6 +57,22 @@ void realizarSimulacao(int totalCiclos, int periodo) {
   Bancada *bancada2Cm = criaBancada(2, 0, ingrediente1Cm, ingrediente2Cm, ingrediente3Cm, ingrediente4Cm, ingrediente5Cm, ingrediente6Cm);
   Bancada *bancada3Cm = criaBancada(3, 0, ingrediente1Cm, ingrediente2Cm, ingrediente3Cm, ingrediente4Cm, ingrediente5Cm, ingrediente6Cm);
 
+  Ingrediente *ingredientesCm[] = {
+    ingrediente1Cm,
+    ingrediente2Cm,
+    ingrediente3Cm,
+    ingrediente4Cm,
+    ingrediente5Cm,
+    ingrediente6Cm
+  };
+
+  Bancada *bancadasCm[] = {
+    bancada1Cm,
+    bancada2Cm,
+    bancada3Cm
+  };
+
+
   Servente *serventes[18];
   for (int i = 0; i < 18; i++) {
     serventes[i] = criarServente(i + 1);
@@ -131,4 +147,14 @@ void realizarSimulacao(int totalCiclos, int periodo) {
 
     Sleep(1000);
   }
+
+  system("clear");
+ 
+  relatorioFinal(tempoTotalEspera, numeroDeUsuariosAtendidos, tempoTotalAtendimento, ingredientesCm, 6, serventes, 18, bancadasCm, 3);
+  
+  char verificator;
+  printf("\ngramas ingrediente 6: %d\n", ingrediente6Cm->quantidadeConsumida); //Ingrediente 6 não está sendo consumido, essa linha aqui é só p verificar ele no fim do programa
+  printf("\n Digite algo para continuar : ");
+  scanf(" %c", &verificator);
+
 }

@@ -1,6 +1,7 @@
 #include "../TADs/bancadas.h"
 #include "../TADs/filas.h"
 #include "../TADs/ingredientes.h"
+#include "../Relatorios/relatorios.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
