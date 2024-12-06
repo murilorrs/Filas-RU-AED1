@@ -51,66 +51,65 @@ int main() {
   Servente *servente17Cm = criarServente(17);
   Servente *servente18Cm = criarServente(18);
 
+  addServenteBancada(bancada1Cm, servente1Cm);
+  addServenteBancada(bancada1Cm, servente2Cm);
+  addServenteBancada(bancada1Cm, servente3Cm);
+  addServenteBancada(bancada1Cm, servente4Cm);
+  addServenteBancada(bancada1Cm, servente5Cm);
+  addServenteBancada(bancada1Cm, servente6Cm);
+
+  addServenteBancada(bancada2Cm, servente7Cm);
+  addServenteBancada(bancada2Cm, servente8Cm);
+  addServenteBancada(bancada2Cm, servente9Cm);
+  addServenteBancada(bancada2Cm, servente10Cm);
+  addServenteBancada(bancada2Cm, servente11Cm);
+  addServenteBancada(bancada2Cm, servente12Cm);
+
+  addServenteBancada(bancada3Cm, servente13Cm);
+  addServenteBancada(bancada3Cm, servente14Cm);
+  addServenteBancada(bancada3Cm, servente15Cm);
+  addServenteBancada(bancada3Cm, servente16Cm);
+  addServenteBancada(bancada3Cm, servente17Cm);
+  addServenteBancada(bancada3Cm, servente18Cm);
+
+  Bancada *bancadas[3] = {bancada1Cm, bancada2Cm, bancada3Cm};
+  Fila *filas[5] = {fila1Cm, fila2Cm, fila3Cm, fila4Cm, fila5Cm};
+
   for (int i = 0; i < 150; i++) {
-    Usuario *usuario = criarUsuario(i);
 
-    if (usuario != NULL && usuario->eVegetariano == 1) {
-      addFila(fila5Cm, usuario);
-      system("clear");
-      exibeFila(fila1Cm);
-      exibeFila(fila2Cm);
-      exibeFila(fila3Cm);
-      exibeFila(fila4Cm);
-      exibeFila(fila5Cm);
-    }
-
-    if (usuario != NULL && usuario->eVegetariano == 0) {
-      int filaAleatoria = (rand() % 4) + 1;
-      switch (filaAleatoria) {
-      case 1:
-        addFila(fila1Cm, usuario);
-        break;
-      case 2:
-        addFila(fila2Cm, usuario);
-        break;
-      case 3:
-        addFila(fila3Cm, usuario);
-        break;
-      case 4:
-        addFila(fila4Cm, usuario);
-        break;
+    for (int j = 0; j < 2; j++)
+    {
+      Usuario *usuario = criarUsuario(i);
+        if (usuario != NULL && usuario->eVegetariano == 1) {
+        addFila(fila5Cm, usuario);
       }
-      system("clear");
-      exibeFila(fila1Cm);
-      exibeFila(fila2Cm);
-      exibeFila(fila3Cm);
-      exibeFila(fila4Cm);
-      exibeFila(fila5Cm);
+
+      if (usuario != NULL && usuario->eVegetariano == 0) {
+        int filaAleatoria = (rand() % 4) + 1;
+        switch (filaAleatoria) {
+        case 1:
+          addFila(fila1Cm, usuario);
+          break;
+        case 2:
+          addFila(fila2Cm, usuario);
+          break;
+        case 3:
+          addFila(fila3Cm, usuario);
+          break;
+        case 4:
+          addFila(fila4Cm, usuario);
+          break;
+        }
+      }
     }
 
-    Bancada *bancadas[3] = {bancada1Cm, bancada2Cm, bancada3Cm};
-    Fila *filas[5] = {fila1Cm, fila2Cm, fila3Cm, fila4Cm, fila5Cm};
-
-    addServenteBancada(bancada1Cm, servente1Cm);
-    addServenteBancada(bancada1Cm, servente2Cm);
-    addServenteBancada(bancada1Cm, servente3Cm);
-    addServenteBancada(bancada1Cm, servente4Cm);
-    addServenteBancada(bancada1Cm, servente5Cm);
-    addServenteBancada(bancada1Cm, servente6Cm);
-
-    addServenteBancada(bancada2Cm, servente7Cm);
-    addServenteBancada(bancada2Cm, servente8Cm);
-    addServenteBancada(bancada2Cm, servente9Cm);
-    addServenteBancada(bancada2Cm, servente10Cm);
-    addServenteBancada(bancada2Cm, servente11Cm);
-    addServenteBancada(bancada2Cm, servente12Cm);
-
-    addServenteBancada(bancada3Cm, servente13Cm);
-    addServenteBancada(bancada3Cm, servente14Cm);
-    addServenteBancada(bancada3Cm, servente15Cm);
-    addServenteBancada(bancada3Cm, servente16Cm);
-    addServenteBancada(bancada3Cm, servente17Cm);
-    addServenteBancada(bancada3Cm, servente18Cm);
+    system("clear");
+    exibeFila(fila1Cm);
+    exibeFila(fila2Cm);
+    exibeFila(fila3Cm);
+    exibeFila(fila4Cm);
+    exibeFila(fila5Cm);
+    
 
     if (ciclo == 0) {
       verificaEChamaUsuarioBancada(bancada1Cm, filas, &tempoTotalEspera, &numeroDeUsuariosAtendidos, &tempoTotalAtendimento);
@@ -130,21 +129,19 @@ int main() {
 void verificaEChamaUsuarioBancada(Bancada *bancada, Fila *filas[], int *tempoTotalEspera, int *numeroDeUsuariosAtendidos, int *tempoTotalAtendimento) {
 
   if (bancada->estaVazia) {
-    for (int i = 0; i < 5; i++) {
-      for (int j = 0; j < 5; j++) {
-        Fila *filaAtual = filas[j];
+      for (int i = 0; i < 5; i++) {
+        Fila *filaAtual = filas[i];
 
         if (!filaVazia(filaAtual)) {
           Usuario *primeiroUsuario = filaAtual->frente->dado;
 
-          if (primeiroUsuario->eVegetariano == bancada->vegetariana) {
+          if (primeiroUsuario->eVegetariano == bancada->vegetariana && bancada->estaVazia == 1) {
             chamarParaBancada(bancada, filaAtual);
             servirUsuario(bancada, tempoTotalEspera, numeroDeUsuariosAtendidos, tempoTotalAtendimento);
             break;
           }
         }
       }
-    }
   }
 }
 
