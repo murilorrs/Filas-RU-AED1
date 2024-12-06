@@ -22,10 +22,10 @@ int main() {
 
     switch (choice) {
     case 1:
-      realizarSimulacao(10, 1);
+      realizarSimulacao(150, 1);
       break;
     case 2:
-      realizarSimulacao(10, 2);
+      realizarSimulacao(210, 2);
       break;
     case 3:
       realizarSimulacao(150, 3);

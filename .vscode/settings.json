@@ -5,6 +5,9 @@
     "filas.h": "c",
     "usuarios.h": "c",
     "stdio.h": "c",
-    "bancadas.h": "c"
+    "bancadas.h": "c",
+    "servente.h": "c",
+    "vasilhas.h": "c",
+    "app.h": "c"
   }
 }

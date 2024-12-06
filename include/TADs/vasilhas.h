@@ -1,5 +1,6 @@
 #include "./ingredientes.h"
 #include <stdbool.h>
+#include <windows.h>
 
 #define CAPING1 5000 // Capacidade da vasilha 1 (em gramas)
 
