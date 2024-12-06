@@ -56,9 +56,9 @@ void exibeFila(Fila *fila) {
   No *noAtual = fila->frente;
 
   if (fila->eVegetariana == 1) {
-    printf("\033[0;34mUSUARIOS NA FILA %d \033[0;32m(Veg):\n\n\033[0m", fila->id);
+    printf("\033[0;36mUSUARIOS NA FILA %d \033[0;32m(Veg):\n\n\033[0m", fila->id);
   } else {
-    printf("\033[0;34mUSUARIOS NA FILA %d:\n\n\033[0m", fila->id);
+    printf("\033[0;36mUSUARIOS NA FILA %d:\n\n\033[0m", fila->id);
   }
 
   while (noAtual != NULL) {

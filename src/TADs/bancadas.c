@@ -23,6 +23,8 @@ Bancada *criaBancada(int id, int vegetariana, Ingrediente *ingrediente1, Ingredi
   bancada->serventes[4] = NULL;
   bancada->serventes[5] = NULL;
 
+  bancada->usuario = NULL;
+
   bancada->id = id;
   bancada->totalAtendimentos = 0;
   bancada->tempoTotalAtendimento = 0;
@@ -40,8 +42,8 @@ void addServenteBancada(Bancada *bancada, Servente *servente) {
     return;
   }
 
-  if (bancada->numServentes >= 6) {
-    printf("\033[0;33mWARNING: Bancada já está cheia\033[0m\n");
+  if (bancada->numServentes > 6) {
+    printf("\033[0;33mWARNING: Bancada %d ja esta cheia\033[0m\n", bancada->id);
     return;
   }
 
@@ -96,7 +98,7 @@ void servirUsuario(Bancada *bancada, int *tempoTotalEspera, int *numeroDeUsuario
     return;
   }
 
-  for (int i = 0; i < 6; i++) {
+  for (int i = 0; i < 5; i++) {
     Servente *servente = bancada->serventes[i];
 
     if (servente == NULL) {
@@ -135,7 +137,6 @@ void servirUsuario(Bancada *bancada, int *tempoTotalEspera, int *numeroDeUsuario
     }
     bancada->tempoTotalAtendimento++;
   }
-  printf("\033[1;33mCheckpoint saida loop\033[0m\n\n");
 
   bancada->totalAtendimentos++;
   bancada->estaVazia = 1;
@@ -145,7 +146,7 @@ void servirUsuario(Bancada *bancada, int *tempoTotalEspera, int *numeroDeUsuario
   tempoTotalAtendimento += bancada->usuario->tempoAtendimento;
   numeroDeUsuariosAtendidos++;
   free(bancada->usuario);
-  bancada->usuario = NULL;  
+  bancada->usuario = NULL;
 }
 
 int checaFoodRate(Bancada *bancada, Servente *servente) {
