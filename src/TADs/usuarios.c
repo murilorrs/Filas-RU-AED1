@@ -28,7 +28,7 @@ Usuario *criarUsuario(int id) {
 
   int vegetariano = rand() % 11;
 
-  if (vegetariano > 8)
+  if (vegetariano > 6)
     usuario->eVegetariano = 1;
   else
     usuario->eVegetariano = 0;

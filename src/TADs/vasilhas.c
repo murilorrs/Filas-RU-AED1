@@ -18,6 +18,7 @@ Vasilha *criaVasilha(Ingrediente *ingrediente) {
 
 bool TrocaDeVasilha(Vasilha *vasilha) {
   vasilha->quantidade_Atual = CAPING1;
+  Sleep(2000);
   return true;
 }
 
