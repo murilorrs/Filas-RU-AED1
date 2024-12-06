@@ -43,10 +43,10 @@ Usuario *rmFila(Fila *fila) {
 
   fila->frente = fila->frente->proximo;
   if (fila->frente == NULL) {
-    fila->tras = NULL; // Se a fila ficou vazia, o de trás também vai ser NULL
+    fila->tras = NULL;
   }
 
-  printf("\033[0;32m--->USUARIO DE ID %d VAI SAIR DA FILA\033[0m\n\n", dado->id);
+  printf("\033[0;32m--->USUARIO DE ID %d FOI CHAMADO PARA A BANCADA<---\033[0m\n\n", dado->id);
   free(noRemovido);
 
   return dado;
@@ -64,7 +64,7 @@ void exibeFila(Fila *fila) {
   while (noAtual != NULL) {
     printf("ID: %02d | Food1: %02d | Food2: %02d | Food3: %02d | Food4: %02d | Food5: %02d | Food6: %02d | E Vegetariano: %d\n\n", noAtual->dado->id, noAtual->dado->food1Rate,
            noAtual->dado->food2Rate, noAtual->dado->food3Rate, noAtual->dado->food4Rate, noAtual->dado->food5Rate, noAtual->dado->food6Rate, noAtual->dado->eVegetariano);
-    noAtual = noAtual->proximo; // Move para o próximo nó
+    noAtual = noAtual->proximo;
   }
 
   printf("\n\n");
