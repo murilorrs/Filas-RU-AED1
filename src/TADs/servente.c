@@ -12,23 +12,21 @@ Servente *criarServente(int id) {
   servente->tempoSeguidoAtendimento = 0;
   servente->tempoTotalAtendimento = 0;
   servente->usuariosAtendidos = 0;
+  servente->estaTrabalhando = 1;
+  servente->tempoDescanso = 0;
 
   return servente;
 }
 
 bool checaTempoTrabalho(Servente *servente) {
   if (servente->tempoSeguidoAtendimento >= 60) {
-    intervaloServente(servente);
-    servente->tempoSeguidoAtendimento = 0;
+    servente->estaTrabalhando = 0;
     return true;
   }
 
-  servente->tempoSeguidoAtendimento++;
-  servente->tempoTotalAtendimento++;
-  return false;
-}
-
-bool intervaloServente(Servente *servente) { // Essa função vai fazer o servente ficar 30 segundos fora de trabalho. Preciso ter uma ideia de como vai ser a execução do programa pra definir ela
-
+  if (servente->tempoDescanso > 30) {
+    servente->estaTrabalhando = 1;
+    servente->tempoSeguidoAtendimento = 0;
+  }
   return false;
 }

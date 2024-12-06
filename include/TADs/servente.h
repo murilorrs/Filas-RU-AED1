@@ -17,10 +17,12 @@
 
 typedef struct {
   int tempoTotalAtendimento;
+  int tempoDescanso;
   int usuariosAtendidos;
   int tempoSeguidoAtendimento;
   int id;
   int ingredienteAServir;
+  int estaTrabalhando;
 } Servente;
 
 Servente *criarServente(int id);

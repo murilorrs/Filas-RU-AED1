@@ -32,9 +32,12 @@ void verificaEChamaUsuarioBancada(Bancada *bancada, Fila *filas[], int *tempoTot
 
 void realizarSimulacao(int totalCiclos, int periodo) {
 
+  int todosUsuariosAtendidos = 0;
+
   if (periodo == 1) {
     printf("CAFÉ DA MANHÃ\n\n");
   }
+
   int tempoTotalEspera = 0, numeroDeUsuariosAtendidos = 0, tempoTotalAtendimento = 0;
   int ciclo = 0;
 
@@ -54,57 +57,37 @@ void realizarSimulacao(int totalCiclos, int periodo) {
   Bancada *bancada2Cm = criaBancada(2, 0, ingrediente1Cm, ingrediente2Cm, ingrediente3Cm, ingrediente4Cm, ingrediente5Cm, ingrediente6Cm);
   Bancada *bancada3Cm = criaBancada(3, 0, ingrediente1Cm, ingrediente2Cm, ingrediente3Cm, ingrediente4Cm, ingrediente5Cm, ingrediente6Cm);
 
-  Servente *servente1Cm = criarServente(1);
-  Servente *servente2Cm = criarServente(2);
-  Servente *servente3Cm = criarServente(3);
-  Servente *servente4Cm = criarServente(4);
-  Servente *servente5Cm = criarServente(5);
-  Servente *servente6Cm = criarServente(6);
-  Servente *servente7Cm = criarServente(7);
-  Servente *servente8Cm = criarServente(8);
-  Servente *servente9Cm = criarServente(9);
-  Servente *servente10Cm = criarServente(10);
-  Servente *servente11Cm = criarServente(11);
-  Servente *servente12Cm = criarServente(12);
-  Servente *servente13Cm = criarServente(13);
-  Servente *servente14Cm = criarServente(14);
-  Servente *servente15Cm = criarServente(15);
-  Servente *servente16Cm = criarServente(16);
-  Servente *servente17Cm = criarServente(17);
-  Servente *servente18Cm = criarServente(18);
+  Servente *serventes[18];
+  for (int i = 0; i < 18; i++) {
+    serventes[i] = criarServente(i + 1);
+  }
 
-  addServenteBancada(bancada1Cm, servente1Cm);
-  addServenteBancada(bancada1Cm, servente2Cm);
-  addServenteBancada(bancada1Cm, servente3Cm);
-  addServenteBancada(bancada1Cm, servente4Cm);
-  addServenteBancada(bancada1Cm, servente5Cm);
-  addServenteBancada(bancada1Cm, servente6Cm);
-
-  addServenteBancada(bancada2Cm, servente7Cm);
-  addServenteBancada(bancada2Cm, servente8Cm);
-  addServenteBancada(bancada2Cm, servente9Cm);
-  addServenteBancada(bancada2Cm, servente10Cm);
-  addServenteBancada(bancada2Cm, servente11Cm);
-  addServenteBancada(bancada2Cm, servente12Cm);
-
-  addServenteBancada(bancada3Cm, servente13Cm);
-  addServenteBancada(bancada3Cm, servente14Cm);
-  addServenteBancada(bancada3Cm, servente15Cm);
-  addServenteBancada(bancada3Cm, servente16Cm);
-  addServenteBancada(bancada3Cm, servente17Cm);
-  addServenteBancada(bancada3Cm, servente18Cm);
+  for (int i = 0; i < 6; i++)
+    addServenteBancada(bancada1Cm, serventes[i]);
+  for (int i = 6; i < 12; i++)
+    addServenteBancada(bancada2Cm, serventes[i]);
+  for (int i = 12; i < 18; i++)
+    addServenteBancada(bancada3Cm, serventes[i]);
 
   Bancada *bancadas[3] = {bancada1Cm, bancada2Cm, bancada3Cm};
+  int totalBancadas = (periodo == 3) ? 2 : 3;
+
   Fila *filas[4] = {fila1Cm, fila2Cm, fila3Cm, fila4Cm};
 
+  int quantidadeUsuarios = 0;
+
+  if (periodo == 3) {
+    quantidadeUsuarios = 1;
+  } else {
+    quantidadeUsuarios = 2;
+  }
+
   for (int i = 0; i < totalCiclos; i++) {
-    for (int j = 0; j < 1; j++) {
+    for (int j = 0; j < quantidadeUsuarios; j++) {
       Usuario *usuario = criarUsuario(i);
       if (usuario != NULL && usuario->eVegetariano == 1) {
         addFila(fila4Cm, usuario);
-      }
-
-      if (usuario != NULL && usuario->eVegetariano == 0) {
+      } else if (usuario != NULL) {
         int filaAleatoria = (rand() % 3) + 1;
         switch (filaAleatoria) {
         case 1:
@@ -119,13 +102,14 @@ void realizarSimulacao(int totalCiclos, int periodo) {
         }
       }
     }
+
     system("clear");
     if (periodo == 1) {
       printf("\033[0;35m ----------------------- CAFE DA MANHA -----------------------\033[0m\n\n");
     } else if (periodo == 2) {
-      printf("\033[0;35m----------------------- ALMOCO -----------------------\033[0m\n\n");
+      printf("\033[0;35m---------------------------- ALMOCO -----------------------\033[0m\n\n");
     } else {
-      printf("\033[0;35m----------------------- JANTAR -----------------------\033[0m\n\n");
+      printf("\033[0;35m---------------------------- JANTAR -----------------------\033[0m\n\n");
     }
     exibeFila(fila1Cm);
     exibeFila(fila2Cm);
@@ -133,12 +117,17 @@ void realizarSimulacao(int totalCiclos, int periodo) {
     exibeFila(fila4Cm);
 
     if (ciclo == 0) {
-      verificaEChamaUsuarioBancada(bancada1Cm, filas, &tempoTotalEspera, &numeroDeUsuariosAtendidos, &tempoTotalAtendimento);
-      verificaEChamaUsuarioBancada(bancada2Cm, filas, &tempoTotalEspera, &numeroDeUsuariosAtendidos, &tempoTotalAtendimento);
-      verificaEChamaUsuarioBancada(bancada3Cm, filas, &tempoTotalEspera, &numeroDeUsuariosAtendidos, &tempoTotalAtendimento);
+      for (int b = 0; b < totalBancadas; b++) {
+        verificaEChamaUsuarioBancada(bancadas[b], filas, &tempoTotalEspera, &numeroDeUsuariosAtendidos, &tempoTotalAtendimento);
+      }
       ciclo = 1;
     } else {
       ciclo = 0;
+    }
+
+    if (filaVazia(fila1Cm) && filaVazia(fila2Cm) && filaVazia(fila3Cm) && filaVazia(fila4Cm)) {
+      todosUsuariosAtendidos = 1;
+      return;
     }
 
     Sleep(1000);

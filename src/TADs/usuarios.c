@@ -12,7 +12,7 @@ Usuario *criarUsuario(int id) {
 
   int chanceDeSerGerado = rand() % 20;
 
-  if (chanceDeSerGerado > 18) {
+  if (chanceDeSerGerado > 10) {
     free(usuario);
     return NULL;
   }

@@ -45,8 +45,6 @@ Usuario *rmFila(Fila *fila) {
   if (fila->frente == NULL) {
     fila->tras = NULL;
   }
-
-  printf("\033[0;32m--->USUARIO DE ID %d FOI CHAMADO PARA A BANCADA<---\033[0m\n\n", dado->id);
   free(noRemovido);
 
   return dado;

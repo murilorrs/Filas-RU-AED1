@@ -67,43 +67,57 @@ Usuario *chamarParaBancada(Bancada *bancada, Fila *fila) {
     printf("Fila vazia!\n");
     return NULL;
   }
+  if (bancada->estaVazia == 1) {
 
-  if ((bancada->vegetariana == 1 && fila->frente->dado->eVegetariano == 1) || (bancada->vegetariana == 0 && fila->frente->dado->eVegetariano == 0)) {
-    Usuario *usuario = rmFila(fila);
-    if (usuario != NULL) {
-      bancada->estaVazia = 0;
-      bancada->usuario = usuario;
+    if ((bancada->vegetariana == 1 && fila->frente->dado->eVegetariano == 1) || (bancada->vegetariana == 0 && fila->frente->dado->eVegetariano == 0)) {
+      Usuario *usuario = rmFila(fila);
+      if (usuario != NULL) {
+        bancada->estaVazia = 0;
+        bancada->usuario = usuario;
+      }
+      printf("\033[0;32m--->USUARIO DE ID \033[0;31m%d\033[0;32m FOI CHAMADO PARA A BANCADA \033[0;31m%d\033[0;32m<---\033[0m\n\n", bancada->usuario->id, bancada->id);
+
+      return usuario;
     }
-    return usuario;
   }
 
   return NULL;
 }
 
 void servirUsuario(Bancada *bancada, int *tempoTotalEspera, int *numeroDeUsuariosAtendidos, int *tempoTotalAtendimento) {
-  if (bancada == NULL) {
-    fprintf(stderr, "\033[0;31mERROR: Bancada NULL \033[0m\n");
-    return;
-  }
-  if (tempoTotalEspera == NULL) {
-    fprintf(stderr, "\033[0;31mERROR: TempoTotalEspera NULL \033[0m\n");
-    return;
-  }
-  if (numeroDeUsuariosAtendidos == NULL) {
-    fprintf(stderr, "\033[0;31mERROR: numeroDeUsuariosAtendidos NULL \033[0m\n");
-    return;
-  }
-  if (tempoTotalAtendimento == NULL) {
-    fprintf(stderr, "\033[0;31mERROR: tempoTotalAtendimento NULL \033[0m\n");
+  if (bancada == NULL || tempoTotalEspera == NULL || numeroDeUsuariosAtendidos == NULL || tempoTotalAtendimento == NULL) {
+    fprintf(stderr, "\033[0;31mERROR: Parâmetro NULL detectado.\033[0m\n");
     return;
   }
 
   for (int i = 0; i < 5; i++) {
     Servente *servente = bancada->serventes[i];
 
-    if (servente == NULL) {
-      fprintf(stderr, "\033[0;31mERROR: Servente %d é NULL.\033[0m\n", i + 1);
-      continue;
+    checaTempoTrabalho(servente);
+
+    if (servente == NULL || servente->estaTrabalhando == 0) {
+      fprintf(stdout, "\033[0;33mServente %d não está disponível. Procurando substituto...\033[0m\n", i + 1);
+
+      int encontrado = 0;
+      for (int j = 0; j < 5; j++) {
+        if (j == i)
+          continue;
+
+        Servente *substituto = bancada->serventes[j];
+        if (substituto != NULL && substituto->estaTrabalhando == 1) {
+          servente = substituto;
+          encontrado = 1;
+          substituto->usuariosAtendidos++;
+          substituto->tempoTotalAtendimento++;
+          (stdout, "\033[0;32mServente %d substituído pelo Servente %d.\033[0m\n", i + 1, j + 1);
+          break;
+        }
+      }
+
+      if (!encontrado) {
+        fprintf(stderr, "\033[0;31mERROR: Nenhum substituto disponível para Servente %d.\033[0m\n", i + 1);
+        continue;
+      }
     }
 
     servente->ingredienteAServir = i + 1;
@@ -117,12 +131,10 @@ void servirUsuario(Bancada *bancada, int *tempoTotalEspera, int *numeroDeUsuario
     if (foodRate < 50) {
       servente->usuariosAtendidos++;
       bancada->tempoTotalAtendimento++;
-      bancada->estaVazia = 1;
       continue;
     }
 
     Ingrediente *ingrediente = bancada->vasilhas[i]->ingrediente;
-
     int qtdeAserServida = calculaQtdeServida(ingrediente->quantidadeIdealPorPorcao);
 
     ingrediente->quantidadeConsumida += qtdeAserServida;
@@ -131,20 +143,16 @@ void servirUsuario(Bancada *bancada, int *tempoTotalEspera, int *numeroDeUsuario
     servente->usuariosAtendidos++;
     servente->tempoSeguidoAtendimento++;
     servente->tempoTotalAtendimento++;
-
-    if (checaTempoTrabalho(servente)) {
-      printf("\033[0;31mServente %d entrou em intervalo.\033[0m\n", servente->id);
-    }
     bancada->tempoTotalAtendimento++;
   }
 
   bancada->totalAtendimentos++;
   bancada->estaVazia = 1;
 
-  numeroDeUsuariosAtendidos, tempoTotalAtendimento;
-  tempoTotalEspera += bancada->usuario->tempoFila;
-  tempoTotalAtendimento += bancada->usuario->tempoAtendimento;
-  numeroDeUsuariosAtendidos++;
+  *tempoTotalEspera += bancada->usuario->tempoFila;
+  *tempoTotalAtendimento += bancada->usuario->tempoAtendimento;
+  (*numeroDeUsuariosAtendidos)++;
+
   free(bancada->usuario);
   bancada->usuario = NULL;
 }
