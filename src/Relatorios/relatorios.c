@@ -14,50 +14,74 @@
 //  imprimir os dados de todos elementos existentes)
 
 void relatorioTempoMedioEsperaUsuarios(float tempoTotalEspera, int numeroUsuariosAtendidos) {
-  float tempoEsperaMedioUsuarios = tempoTotalEspera / numeroUsuariosAtendidos;
+  float tempoEsperaMedioUsuarios;
+  if (numeroUsuariosAtendidos == 0)
+  {
+    tempoEsperaMedioUsuarios = 0;
+  } else{
+  tempoEsperaMedioUsuarios = tempoTotalEspera / numeroUsuariosAtendidos;
+  }
   printf(ANSI_COLOR_CYAN "1. Tempo médio de espera dos usuários: %.2f minutos\n" ANSI_COLOR_RESET, tempoEsperaMedioUsuarios);
 }
 
-void relatorioQuantidadeTotalIngrediente(Ingrediente Ingrediente[], int numeroElementos) {
+void relatorioQuantidadeTotalIngrediente(Ingrediente *ingrediente[], int numeroElementos) {
+ 
   for (int i = 0; i < numeroElementos; i++) {
-    int qtdTotal = Ingrediente[i].quantidadeConsumida;
-    printf(ANSI_COLOR_GREEN "\t %s: %d gramas consumidas\n" ANSI_COLOR_RESET, Ingrediente[i].nome, qtdTotal);
+    int qtdTotal = ingrediente[i]->quantidadeConsumida;
+    printf(ANSI_COLOR_GREEN "\t %d: %d gramas consumidas\n" ANSI_COLOR_RESET, ingrediente[i]->nome, qtdTotal);
   }
 }
 
-void tempoMedioServente(Servente servente[], int numeroElementos) {
+void tempoMedioServente(Servente *servente[], int numeroElementos) {
   for (int i = 0; i < numeroElementos; i++) {
-    float tempoMedio = servente[i].tempoTotalAtendimento / servente[i].usuariosAtendidos;
-    printf(ANSI_COLOR_YELLOW "\t Servente %d - Tempo médio de atendimento: %.2f minutos\n" ANSI_COLOR_RESET, servente[i].id, tempoMedio);
+    float tempoMedio;
+    if (servente[i]->usuariosAtendidos == 0)
+    {
+      tempoMedio = 0;
+    } else{
+      tempoMedio = servente[i]->tempoTotalAtendimento / servente[i]->usuariosAtendidos;
+    }
+    printf(ANSI_COLOR_YELLOW "\t Servente %d - Tempo médio de atendimento: %.2f minutos\n" ANSI_COLOR_RESET, servente[i]->id, tempoMedio);
   }
 }
 
 void tempoMedioAtendimentoUsuarios(float tempoTotalAtendimento, int numeroUsuariosAtendidos) {
-  int tempoMedioAtendimento = tempoTotalAtendimento / numeroUsuariosAtendidos;
-  printf(ANSI_COLOR_CYAN "\n2. Tempo médio de atendimento dos usuários: %d minutos\n" ANSI_COLOR_RESET, tempoMedioAtendimento);
+  float tempoMedioAtendimento;
+  if (numeroUsuariosAtendidos == 0)
+  {
+    tempoMedioAtendimento = 0;
+  } else{
+  tempoMedioAtendimento = tempoTotalAtendimento / (float)numeroUsuariosAtendidos;
+  }
+  printf(ANSI_COLOR_CYAN "\n2. Tempo médio de atendimento dos usuários: %.2f minutos\n" ANSI_COLOR_RESET, tempoMedioAtendimento);
 }
 
-void tempoMedioBancada(Bancada bancada[], int numeroElementos) {
+void tempoMedioBancada(Bancada *bancada[], int numeroElementos) {
   for (int i = 0; i < numeroElementos; i++) {
-    int tempoMedio = bancada[i].tempoTotalAtendimento / bancada[i].totalAtendimentos;
-    printf(ANSI_COLOR_BLUE "\t Bancada %d - Tempo médio de atendimento: %d minutos\n" ANSI_COLOR_RESET, bancada[i].id, tempoMedio);
+    int tempoMedio;
+    if (bancada[i]->totalAtendimentos == 0)
+    {
+      tempoMedio = 0;
+    } else{
+      tempoMedio = bancada[i]->tempoTotalAtendimento / bancada[i]->totalAtendimentos;
+    }  
+    printf(ANSI_COLOR_BLUE "\t Bancada %d - Tempo médio de atendimento: %d minutos\n" ANSI_COLOR_RESET, bancada[i]->id, tempoMedio);
   }
 }
 
-void quantidadeUsuariosAtendidosServente(Servente servente[], int numeroElementos) {
+void quantidadeUsuariosAtendidosServente(Servente *servente[], int numeroElementos) {
   for (int i = 0; i < numeroElementos; i++) {
-    printf(ANSI_COLOR_YELLOW "\t Servente %d - Usuários atendidos: %d\n" ANSI_COLOR_RESET, servente[i].id, servente[i].usuariosAtendidos);
+    printf(ANSI_COLOR_YELLOW "\t Servente %d - Usuários atendidos: %d\n" ANSI_COLOR_RESET, servente[i]->id, servente[i]->usuariosAtendidos);
   }
 }
 
-void quantidadeUsuariosAtendidosBancada(Bancada bancada[], int numeroElementos) {
+void quantidadeUsuariosAtendidosBancada(Bancada *bancada[], int numeroElementos) {
   for (int i = 0; i < numeroElementos; i++) {
-    printf(ANSI_COLOR_BLUE "\t Bancada %d - Usuários atendidos: %d\n" ANSI_COLOR_RESET, bancada[i].id, bancada[i].totalAtendimentos);
+    printf(ANSI_COLOR_BLUE "\t Bancada %d - Usuários atendidos: %d\n" ANSI_COLOR_RESET, bancada[i]->id, bancada[i]->totalAtendimentos);
   }
 }
 
-void relatorioFinal(float tempoTotalEspera, int numeroUsuariosAtendidos, float tempoTotalAtendimento, Ingrediente ingredientes[], int numIngredientes, Servente serventes[], int numServentes,
-                    Bancada bancadas[], int numBancadas) {
+void relatorioFinal(float tempoTotalEspera, int numeroUsuariosAtendidos, float tempoTotalAtendimento, Ingrediente *ingredientes[], int numIngredientes, Servente *serventes[], int numServentes, Bancada *bancadas[], int numBancadas) {
 
   char linha1[71], linha2[71];
   for (int i = 0; i < 70; i++) {

@@ -25,6 +25,7 @@ Usuario *criarUsuario(int id) {
   usuario->food5Rate = rand() % 101;
   usuario->food6Rate = rand() % 101;
   usuario->tempoFila = 0;
+  usuario->tempoAtendimento = 0;
 
   int vegetariano = rand() % 11;
 
@@ -37,14 +38,12 @@ Usuario *criarUsuario(int id) {
 }
 
 void contaTempoFila(Usuario *usuario) {
-
   if (usuario != NULL && strcmp(usuario->status, "fila") == 0) {
     usuario->tempoFila++;
   }
 }
 
 void contaTempoAtendimento(Usuario *usuario) {
-
   if (usuario != NULL) {
     usuario->tempoAtendimento++;
   }

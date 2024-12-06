@@ -131,6 +131,7 @@ void servirUsuario(Bancada *bancada, int *tempoTotalEspera, int *numeroDeUsuario
     if (foodRate < 50) {
       servente->usuariosAtendidos++;
       bancada->tempoTotalAtendimento++;
+      contaTempoAtendimento(bancada->usuario);
       continue;
     }
 
@@ -144,14 +145,15 @@ void servirUsuario(Bancada *bancada, int *tempoTotalEspera, int *numeroDeUsuario
     servente->tempoSeguidoAtendimento++;
     servente->tempoTotalAtendimento++;
     bancada->tempoTotalAtendimento++;
+    contaTempoAtendimento(bancada->usuario);
   }
 
   bancada->totalAtendimentos++;
   bancada->estaVazia = 1;
 
+  *numeroDeUsuariosAtendidos += 1;
   *tempoTotalEspera += bancada->usuario->tempoFila;
   *tempoTotalAtendimento += bancada->usuario->tempoAtendimento;
-  (*numeroDeUsuariosAtendidos)++;
 
   free(bancada->usuario);
   bancada->usuario = NULL;

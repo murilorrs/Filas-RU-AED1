@@ -22,7 +22,7 @@ int main() {
 
     switch (choice) {
     case 1:
-      realizarSimulacao(150, 1);
+      realizarSimulacao(10, 1);
       break;
     case 2:
       realizarSimulacao(210, 2);
@@ -31,10 +31,11 @@ int main() {
       realizarSimulacao(150, 3);
       break;
     case 4:
-      realizarSimulacao(10, 1);
+      realizarSimulacao(5, 1);
       realizarSimulacao(10, 2);
-      realizarSimulacao(150, 3);
+      realizarSimulacao(10, 3);
       break;
+    case 5:
     case 0:
       printf("\033[1;31mSaindo da simulacao.\033[0m\n");
       return 0;
